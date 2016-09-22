@@ -1,4 +1,10 @@
 <?php
+session_start(); // starts the session
+
+include_once 'includes/dbconnect.php';
+?>
+
+<?php
 	if (isset($_POST["submit"])) {
 		$name = $_POST['name'];
 		$email = $_POST['email'];
@@ -45,7 +51,7 @@ if (!$errName && !$errEmail && !$errMessage && !$errHuman) {
 <?php include 'includes/head.php';?>
 <?php include 'includes/navbar.php';?>
   <body>
-  	<div class="container">
+  	<div class="fluid-container">
   		<div class="row">
   			<div class="col-md-6 col-md-offset-3">
   				<h1 class="page-header text-center">Submit Score</h1>
@@ -93,7 +99,5 @@ if (!$errName && !$errEmail && !$errMessage && !$errHuman) {
 		</div>
 	</div>
 	<?php include 'includes/footer.php';?>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

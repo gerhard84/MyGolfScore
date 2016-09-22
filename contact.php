@@ -41,7 +41,7 @@ if (!$errName && !$errEmail && !$errMessage && !$errHuman) {
 <!DOCTYPE html>
 <html lang="en">
 
-<?php $pageTitle = "Home Page";?>
+<?php $pageTitle = "Contact";?>
 <?php include 'includes/head.php';?>
 <?php include 'includes/navbar.php';?>
 
@@ -94,7 +94,5 @@ if (!$errName && !$errEmail && !$errMessage && !$errHuman) {
 		</div>
 	</div>
 	<?php include 'includes/footer.php';?>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>
