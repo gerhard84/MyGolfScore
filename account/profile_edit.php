@@ -24,9 +24,11 @@
 
                     <div class="form-group">
                         <label for="email">E-Mail:</label>
-                        <input type="text" name="email" value="<?php echo $email; ?>" class="form-control"/>
+                        <input type="text" name="email" required value="<?php echo $email; ?>" class="form-control"/>
                     </div>
+
                     <h1 class="page-header text-center">Change password</h1>
+
                     <div class="form-group">
                         <label for="password_1">New Password:</label>
                         <input type="password" name="password_1" class="form-control"/>
@@ -40,6 +42,7 @@
                     <div class="form-group">
                         <input type="submit" value="Update Profile" class="btn btn-primary" />
                     </div>
+                </fieldset>
             </form>
 
                 <div class="form-group">

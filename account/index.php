@@ -111,6 +111,7 @@ switch ($action) {
         $player_name = $_SESSION['user']['firstName'] . ' ' .
                             $_SESSION['user']['lastName'];
         $email = $_SESSION['user']['email'];
+        $town = $_SESSION['user']['town'];
 
 
         //$rounds = get_rounds_by_player_id($_SESSION['user']['playerID']);
@@ -122,6 +123,7 @@ switch ($action) {
         $first_name = $_SESSION['user']['firstName'];
         $last_name = $_SESSION['user']['lastName'];
         $email = $_SESSION['user']['email'];
+        $town = $_SESSION['user']['town'];
         include 'profile_edit.php';
         break;
 
@@ -129,6 +131,7 @@ switch ($action) {
         // Get the customer data
         $player_id = $_SESSION['user']['playerID'];
         $email = $_POST['email'];
+        $town = $_POST['town'];
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
         $password_1 = $_POST['password_1'];
@@ -138,10 +141,10 @@ switch ($action) {
         $old_player = get_player($player_id);
 
         // Validate the data for the customer
-        if ($email != $old_customer['emai']) {
+        if ($email != $old_player['email']) {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 display_error('The e-mail address ' . $email . ' is not valid.');
-            } elseif (is_valid_customer_email($email)) {
+            } elseif (is_valid_player_email($email)) {
                 display_error('The e-mail address ' . $email . ' is already in use.');
             }
         }
@@ -162,11 +165,11 @@ switch ($action) {
         }
 
         // Update the customer data
-        update_customer($customer_id, $email, $first_name, $last_name,
-            $password_1, $password_2);
+        update_player($player_id, $email, $first_name, $last_name,
+            $password_1, $password_2, $town);
 
         // Set the new customer data in the session
-        $_SESSION['user'] = get_customer($customer_id);
+        $_SESSION['user'] = get_player($player_id);
 
         redirect('.');
         break;

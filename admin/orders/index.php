@@ -33,7 +33,7 @@ switch($action) {
         // Get customer data
         $customer = get_customer($order['customerID']);
         $name = $customer['lastName'] . ', ' . $customer['firstName'];
-        $email = $customer['emailAddress'];
+        $email = $customer['email'];
         $card_number = $order['cardNumber'];
         $card_expires = $order['cardExpires'];
         $card_name = card_name($order['cardType']);
@@ -70,7 +70,7 @@ switch($action) {
         // Get customer data
         $customer = get_customer($order['customerID']);
         $name = $customer['lastName'] . ', ' . $customer['firstName'];
-        $email = $customer['emailAddress'];
+        $email = $customer['email'];
 
         include 'confirm_delete.php';
         break;

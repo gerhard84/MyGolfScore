@@ -1,75 +1,121 @@
+<?php $pageTitle = "Admin - Account";?>
 <?php include '../../view/header.php'; ?>
-<div id="content">
-    <h1 class="top">Administrator Accounts</h1>
+<div class="container">
+
+<div class="col-md-5 col-md-offset-3">
+    <h1 class="page-header text-center">Administrator Accounts</h1>
     <?php if (isset($_SESSION['admin'])) : ?>
     <h2>My Account</h2>
-    <p><?php echo $name . ' (' . $email . ')'; ?></p>
-    <form action="" method="post">
-        <input type="hidden" name="action" value="view_edit" />
-        <input type="hidden" name="admin_id" value="<?php echo $admin_id; ?>" />
-        <input type="submit" value="Edit" />
+
+
+    <form action="" method="post" class="form-inline">
+        <div class="form-group">
+            <label for="email"><?php echo $name . ' (' . $email . ')'; ?></label>
+            <input type="hidden" name="action" value="view_edit" />
+            <input type="hidden" name="admin_id" value="<?php echo $admin_id; ?>" />
+            <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+        </div>
     </form>
     <?php endif; ?>
     <?php if ( count($admins) > 1 ) : ?>
         <h2>Other Administrators</h2>
-        <table>
+        <table id="admin_list" class="display dt-right" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Edit </th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            
+
+            <tbody>
         <?php foreach($admins as $admin):
             if ( $admin['adminID'] != $admin_id ) :
                 ?>
                 <tr>
-                    <td><?php echo $admin['lastName'] . ', ' .
-                               $admin['firstName']; ?>
+                    <td><?php echo $admin['lastName'];?></td>
+                    <td><?php echo $admin['firstName'];?></td>
+                    <td>
+                        <form action="" method="post">
+                            <input type="hidden" name="action" value="view_edit" />
+                            <input type="hidden" name="admin_id" value="<?php echo $admin['adminID'];?>"/>
+                            <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                        </form>
                     </td>
                     <td>
-                        <form action="" method="post" class="inline">
-                            <input type="hidden" name="action"
-                                value="view_edit" />
-                            <input type="hidden" name="admin_id"
-                                value="<?php echo $admin['adminID']; ?>" />
-                            <input type="submit" value="Edit" />
-                        </form>
-                        <form action="" method="post" class="inline">
-                            <input type="hidden" name="action"
-                                value="view_delete_confirm" />
-                            <input type="hidden" name="admin_id"
-                                value="<?php echo $admin['adminID']; ?>" />
-                            <input type="submit" value="Delete" />
-                        </form>
+                        <form action="" method="post" >
+                        <input type="hidden" name="action" value="view_delete_confirm" />
+                        <input type="hidden" name="admin_id" value="<?php echo $admin['adminID']; ?>" />
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </td>
+                    </form>
                 </tr>
+
             <?php endif; ?>
         <?php endforeach; ?>
         </table>
     <?php endif; ?>
-    <h2>Add an Administrator</h2>
-    <form action="" method="post" id="add_admin_user_form">
+
+    <h2>Add Administrator</h2>
+    <form action="" method="post" id="add_admin_user_form" class="form-horizontal">
         <input type="hidden" name="action" value="create" />
-        <label for="email">E-Mail:</label>
-        <input type="text" name="email"
-               value="<?php echo $_SESSION['form_data']['email']; ?>" />
-        <br />
-        <label for="first_name">First Name:</label>
-        <input type="text" name="first_name"
-               value="<?php echo $_SESSION['form_data']['first_name']; ?>" />
-        <br />
-        <label for="last_name">Last Name:</label>
-        <input type="text" name="last_name"
-               value="<?php echo $_SESSION['form_data']['last_name']; ?>" />
-        <br />
-        <label for="password_1">Password:</label>
-        <input type="password" name="password_1" />
-        <?php echo $password_message; ?>
-        <br />
-        <label for="password_2">Retype password:</label>
-        <input type="password" name="password_2" />
-        <br />
-        <label>&nbsp;</label>
-        <input type="submit" value="Add Admin User" />
+
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="email">E-Mail:</label>
+                <div class="col-sm-8">
+                    <input type="text" name="email" placeholder="Email address" required class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="first_name">First Name:</label>
+                <div class="col-sm-8">
+                <input type="text" name="first_name" placeholder="First Name" required class="form-control" />
+            </div>
+        </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="last_name">Last Name:</label>
+                <div class="col-sm-8">
+                <input type="text" name="last_name" placeholder="Last Name" required class="form-control" />
+            </div>
+        </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="password_1">Password:</label>
+                <div class="col-sm-8">
+                <input type="password" name="password_1" placeholder="Password" required class="form-control" />
+                <?php //echo $password_message; ?>
+            </div>
+        </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="password_2">Retype password:</label>
+                <div class="col-sm-8">
+                <input type="password" name="password_2" placeholder="Retype Password" required class="form-control"/>
+            </div>
+        </div>
+            <div class="form-group">
+                <div class="col-sm-8">
+            <input type="submit" value="Add Admin" class="btn btn-success"/>
+        </div>
+    </div>
+
     </form>
+</div>
+</div>
 </div>
 <?php
 if (isset($_SESSION['form_data'])) {
     unset($_SESSION['form_data']);
 }
 ?>
+<script language='javascript'>
+$(document).ready(function() {
+  $('#admin_list').DataTable();
+} );
+</script>
+
 <?php include '../../view/footer.php'; ?>

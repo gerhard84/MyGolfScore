@@ -4,7 +4,7 @@ function get_courses() {
     $query = 'SELECT *,
                 (SELECT COUNT(*)
                  FROM holes
-                 WHERE Holes.courseID = Courses.courseID)
+                 WHERE holes.courseID = courses.courseID)
                  AS holeCount
               FROM courses
               ORDER BY courseID';
@@ -68,7 +68,7 @@ function add_course($name, $city, $province, $tel, $website, $email, $rating,
         $statement->execute();
         $statement->closeCursor();
 
-        // Get the last hole ID that was automatically generated
+        // Get the last course ID that was automatically generated
         $course_id = $db->lastInsertId();
         return $course_id;
     } catch (PDOException $e) {
@@ -135,6 +135,16 @@ function delete_course($course_id) {
         $error_message = $e->getMessage();
         display_db_error($error_message);
     }
+}
+
+function course_count() {
+    global $db;
+    $query = 'SELECT count(*) AS courseCount FROM courses';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $result = $statement->fetch();
+    $statement->closeCursor();
+    return $result['courseCount'];
 }
 
 ?>

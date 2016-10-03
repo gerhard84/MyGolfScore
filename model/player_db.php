@@ -105,4 +105,14 @@ function update_player($player_id, $email, $first_name, $last_name,
         $statement->closeCursor();
     }
 }
+
+function player_count() {
+    global $db;
+    $query = 'SELECT count(*) AS playerCount FROM players';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $result = $statement->fetch();
+    $statement->closeCursor();
+    return $result['playerCount'];
+}
 ?>

@@ -1,4 +1,4 @@
-<?php include 'head.php'; ?>
+<?php include 'view/header.php'; ?>
 <div id="main">
     <h1>Database Error</h1>
     <p>A database error occurred.</p>

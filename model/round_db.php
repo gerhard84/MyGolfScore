@@ -28,13 +28,13 @@ function tax_amount($subtotal) {
 
 function card_name($card_type) {
     switch($card_type){
-        case 1: 
+        case 1:
            return 'MasterCard';
            break;
-        case 2: 
+        case 2:
             return 'Visa';
             break;
-        case 3: 
+        case 3:
             return 'Discover';
             break;
         case 4:
@@ -176,5 +176,15 @@ function delete_order($order_id) {
     $statement->bindValue(':order_id', $order_id);
     $statement->execute();
     $statement->closeCursor();
+}
+
+function course_count() {
+    global $db;
+    $query = 'SELECT count(*) AS courseCount FROM courses';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $result = $statement->fetch();
+    $statement->closeCursor();
+    return $result['courseCount'];
 }
 ?>

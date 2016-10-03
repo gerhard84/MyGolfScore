@@ -1,3 +1,4 @@
+<?php $pageTitle = "Home Page";?>
 <?php
 
 
@@ -6,10 +7,11 @@
  ?>
 
 <?php include 'view/header.php'; ?>
+
 <body>
-  <?php include 'view/navbar.php';?>
-      <div class="fluid-container">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <?php include 'view/navbar.php';?>
+<div class="container-responsive">
+     <header id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -17,7 +19,7 @@
       <li data-target="#myCarousel" data-slide-to="2"></li>
       <li data-target="#myCarousel" data-slide-to="3"></li>
       </ol>
-      <!-- NEW COMMENT TO TEST GIT -->
+
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
       <div class="item active">
@@ -58,7 +60,16 @@
       <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
       </a>
-    </div>
-  </div>  <!-- END Main fluid-container">  -->
+</header>
+</div>
 
 <?php include 'view/footer.php'; ?>
+
+
+
+    <!-- Script to Activate the Carousel -->
+    <script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>

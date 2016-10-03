@@ -41,34 +41,78 @@ function get_hole($hole_id) {
     }
 }
 
+//(‘$courseID’, $i, ‘$h’ . $i . ‘_par’, ‘$h’ . $i . ‘_si’, ‘$h’ . $i . ‘_meter’)
 
-function add_hole($course_id, $code, $name, $description,
-        $price, $discount_percent) {
+//$sql = "INSERT INTO holes
+//                    (courseID,holeNo,par,stroke,meters)
+//                VALUES
+//                ('$courseID', '1', '$h1_par', '$h1_si', '$h1_meter'),
+
+function add_hole() {
     global $db;
-    $query = 'INSERT INTO holes
-                 (courseID,holeNo,par,stroke,meters)
-              VALUES
-                 (:course_id, :code, :name, :description, :price,
-                  :discount_percent, NOW())';
-    try {
+    $keys = array_keys($_POST['holeNo']);
+    foreach ( $keys as $key ) {
+        $course_id = ($_POST['course_id']);
+        $holeNo = ($_POST['holeNo'][$key]);
+        $par = ($_POST['par'][$key]);
+        $stroke = ($_POST['stroke'][$key]);
+        $meters = ($_POST['meters'][$key]);
+        $query = "
+            insert into holes
+                    (courseID,holeNo,par,stroke,meters)
+                VALUES
+                    (:course_id, :holeNo, :par, :stroke, :meters)
+        ";
         $statement = $db->prepare($query);
         $statement->bindValue(':course_id', $course_id);
-        $statement->bindValue(':code', $code);
-        $statement->bindValue(':name', $name);
-        $statement->bindValue(':description', $description);
-        $statement->bindValue(':price', $price);
-        $statement->bindValue(':discount_percent', $discount_percent);
+        $statement->bindValue(':holeNo', $holeNo);
+        $statement->bindValue(':par', $par);
+        $statement->bindValue(':stroke', $stroke);
+        $statement->bindValue(':meters', $meters);
         $statement->execute();
-        $statement->closeCursor();
-
-        // Get the last hole ID that was automatically generated
-        $hole_id = $db->lastInsertId();
-        return $hole_id;
-    } catch (PDOException $e) {
-        $error_message = $e->getMessage();
-        display_db_error($error_message);
     }
-}
+        try {
+        $statement->closeCursor();
+         //Get the last hole ID that was automatically generated
+            $hole_id = $db->lastInsertId();
+             return $hole_id;
+         } catch (PDOException $e) {
+             $error_message = $e->getMessage();
+             display_db_error($error_message);
+         }
+     }
+
+
+        //    $error_message = $e->getMessage();
+        //     display_db_error($error_message);
+
+
+
+
+
+
+    // $query = 'INSERT INTO holes
+    //              (courseID,holeNo,par,stroke,meters)
+    //           VALUES
+    //              (:course_id, :holeNo, :h1_par, :h1_si, :h1_meter)';
+    // try {
+    //     $statement = $db->prepare($query);
+    //     $statement->bindValue(':course_id', $course_id);
+    //     $statement->bindValue(':holeNo', $holeNo);
+    //     $statement->bindValue(':h1_par', $h1_par);
+    //     $statement->bindValue(':h1_si', $h1_si);
+    //     $statement->bindValue(':h1_meter', $h1_meter);
+    //     $statement->execute();
+    //     $statement->closeCursor();
+    //
+    //     // Get the last hole ID that was automatically generated
+    //     $hole_id = $db->lastInsertId();
+    //     return $hole_id;
+    // } catch (PDOException $e) {
+    //     $error_message = $e->getMessage();
+    //     display_db_error($error_message);
+    // }
+//}
 
 function update_hole($hole_id, $code, $name, $desc,
                         $price, $discount, $course_id) {

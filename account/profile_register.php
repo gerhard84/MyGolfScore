@@ -10,28 +10,29 @@
 					<div class="form-group">
 					<label for="first_name">First Name:</label>
 					<input type="text" name="first_name" placeholder="First Name"
-                              required value="<?php echo $_SESSION['form_data']['first_name']; ?>" class="form-control"
+                              required value="" class="form-control"
+
                         />
 					</div>
 
                     <div class="form-group">
 						<label for="last_name">Last Name:</label>
 						<input type="text" name="last_name" placeholder="Last Name"
-                               required value="<?php echo $_SESSION['form_data']['last_name']; ?>" class="form-control"
+                               required value="" class="form-control"
                         />
 					</div>
 
                     <div class="form-group">
 						<label for="town">Town:</label>
 						<input type="text" name="town" placeholder="Town"
-                               required value="<?php echo $_SESSION['form_data']['town']; ?>" class="form-control"
+                               required value="" class="form-control"
                         />
 					</div>
 
                     <div class="form-group">
 						<label for="email">Email:</label>
 						<input type="text" name="email" placeholder="Email Address"
-                               required value="<?php echo $_SESSION['form_data']['email']; ?>" class="form-control"
+                               required value="" class="form-control"
                         />
 					</div>
 
@@ -40,7 +41,7 @@
 						<input type="password" name="password_1" placeholder="Password"
                                 class="form-control"
                         />
-                        <span class="text-danger"><?php echo $password_message; ?></span>
+                        
 					</div>
 
                     <div class="form-group">

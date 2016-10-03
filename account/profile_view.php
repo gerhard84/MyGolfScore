@@ -1,15 +1,15 @@
 <?php include '../view/header.php'; ?>
-<?php include '../view/sidebar.php'; ?>
+<?php include '../view/navbar.php'; ?>
 <div id="content">
-    <h1 class="top">My Account</h1>
+    <h1 class="top">My Profile</h1>
     <p><?php echo $player_name . ' (' . $email . ')'; ?></p>
     <form action="" method="post">
         <input type="hidden" name="action" value="view_profile_edit" />
         <input type="submit" value="Edit Profile" />
     </form>
 
-    
-    <?php if (count($rounds) > 0 ) : ?>
+
+    <!-- <?php if (count($rounds) > 0 ) : ?>
         <h2>Your Rounds</h2>
         <ul>
             <?php foreach($rounds as $round) :
@@ -26,6 +26,6 @@
                 </li>
             <?php endforeach; ?>
         </ul>
-    <?php endif; ?>
+    <?php endif; ?> -->
 </div>
 <?php include '../view/footer.php'; ?>

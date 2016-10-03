@@ -1,9 +1,12 @@
+<?php $pageTitle = "Admin - Account";?>
 <?php include '../../view/header.php'; ?>
+<?php //include ('../../view/navbar_admin.php');?>
+<div class="container">
 
-<div id="main">
-    <h1>Delete Account</h1>
-    <p>Are you sure you want to delete the account for
-       <?php echo $last_name . ', ' . $first_name .
+<div class="col-md-5 col-md-offset-3">
+    <h1 class="page-header text-center">Delete Account</h1>
+    <h3>Delete the account for:</h3>
+       <p><?php echo $last_name . ', ' . $first_name .
                   ' (' . $email . ')'; ?>?</p>
     <form action="" method="post">
         <input type="hidden" name="action" value="delete" />
@@ -14,5 +17,6 @@
     <form action="" method="post">
         <input type="submit" value="Cancel" />
     </form>
+</div>
 </div>
 <?php include '../../view/footer.php'; ?>
