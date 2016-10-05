@@ -31,8 +31,10 @@
                   <th>Name</th>
                   <th>City</th>
                   <th>Province</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th>Course</th>
+                  <th>Course</th>
+                  <th>Holes</th>
+                  <th>Holes</th>
                   <th>Holes</th>
                 </tr>
             </thead>
@@ -41,8 +43,10 @@
                     <th>Name</th>
                     <th>City</th>
                     <th>Province</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Course</th>
+                    <th>Course</th>
+                    <th>Holes</th>
+                    <th>Holes</th>
                     <th>Holes</th>
                 </tr>
                 </tfoot>
@@ -56,6 +60,7 @@
                         <form action="" method="post">
                             <input type="hidden" name="action" value="course_view_edit">
                             <input type="hidden" name="course_id" value="<?php echo $course['courseID'];?>">
+                            <input type="hidden" name="course_name" value="<?php echo $course['courseName'];?>">
                             <button type="submit" class="btn btn-warning btn-sm">Edit</button>
                         </form>
                     </td>
@@ -70,7 +75,21 @@
                         <form action="" method="post">
                             <input type="hidden" name="action" value="holes_view_add">
                             <input type="hidden" name="course_id" value="<?php echo $course['courseID'];?>">
-                            <button type="submit" class="btn btn-info btn-sm">Add</button>
+                            <button type="submit" class="btn btn-success btn-sm">Add</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="post">
+                            <input type="hidden" name="action" value="holes_view_edit">
+                            <input type="hidden" name="course_id" value="<?php echo $course['courseID'];?>">
+                            <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="post">
+                            <input type="hidden" name="action" value="holes_view_delete_confirm">
+                            <input type="hidden" name="course_id" value="<?php echo $course['courseID'];?>">                            
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </td>
                 </tr>

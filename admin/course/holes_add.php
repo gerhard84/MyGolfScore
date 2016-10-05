@@ -1,21 +1,17 @@
-<<?php $course_id = $_POST['course_id'];
-
- 	echo	'<pre>';
- 	var_dump($_POST);
- 	echo'</pre>';
-
-?>
 <?php require_once('../../util/main.php');
 include 'view/header.php';
 include ('view/navbar_admin.php');
 require_once('model/course_db.php');
 require_once('model/hole_db.php'); ?>
 <div class="container">
+
 	<div class="col-md-8 col-md-offset-2">
 		<h1 class="page-header text-center">Add Holes</h1>
+
 		<form action="" method="post" class="form-horizontal" >
 			 <input type="hidden" name="action" value="holes_add" >
 			 <input type="hidden" name="course_id" value="<?php echo $course_id ?>" >
+
 			<div class="col-md-6">
 				<div class="panel panel-primary">
 					<div class="panel-heading">Front 9</div>

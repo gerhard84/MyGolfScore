@@ -1,16 +1,16 @@
-<?php require_once('../../util/main.php');
+<?php
  include 'view/header.php';
  include ('view/navbar_admin.php');
- require_once('model/course_db.php'); ?>
+ require_once('model/course_db.php');
+ ?>
 <div class="container">
 
 <div class="col-md-5 col-md-offset-3">
     <h1 class="page-header text-center">Course Add</h1>
 
-
-
   <form action="" method="post" class="form-horizontal">
       <input type="hidden" name="action" value="course_add" />
+      
 
       <div class="form-group">
           <label class="control-label col-sm-4" for="name">Course Name:</label>

@@ -1,15 +1,18 @@
-<?php include '../../view/header.php'; ?>
+<?php
+ include 'view/header.php';
+ include ('view/navbar_admin.php');
+ ?>
 <div class="container">
 
 <div class="col-md-5 col-md-offset-3">
     <h1 class="page-header text-center">Edit Course</h1>
-    <div class="well well-sm">
+
     <form action="" method="post" class="form-horizontal">
-        <input type="hidden" name="action" value="course_update" />
+        <input type="hidden" name="action" value="course_edit" />
         <input type="hidden" name="course_id" value="<?php echo $course_id; ?>" />
 
         <div class="form-group">
-            <label class="control-label col-sm-4" for="name">Name:</label>
+            <label class="control-label col-sm-4" for="name">Course Name:</label>
             <div class="col-sm-8">
                 <input type="text" name="name" value="<?php echo $name; ?>" required class="form-control" />
             </div>
@@ -116,7 +119,6 @@
         <input type="submit" value="Cancel" class="btn btn-danger form-control"/>
     </form>
     </div>
-</div>
 </div>
 </div>
 <?php include '../../view/footer.php'; ?>

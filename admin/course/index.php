@@ -37,13 +37,11 @@ switch ($action) {
         include('course_list.php');
         break;
 
-    case 'course_delete':
-        $course_id = $_POST['course_id'];
+    case 'course_view_add':
 
-        delete_course($course_id);
-
-        header("Location: .");
-        break;
+    // Display Add page
+    include 'course_add.php';
+    break;
 
     case 'course_add':
         $name = $_POST['name'];
@@ -83,11 +81,7 @@ switch ($action) {
         header("Location: .");
         break;
 
-    case 'course_view_add':
 
-        // Display Add page
-        include 'course_add.php';
-        break;
 
     case 'course_view_edit':
         // Get course data
@@ -112,7 +106,7 @@ switch ($action) {
         include 'course_edit.php';
         break;
 
-    case 'course_update':
+    case 'course_edit':
         $course_id =  intval($_POST['course_id']);
         update_course(
         $course_id,
@@ -161,13 +155,65 @@ switch ($action) {
         break;
 
     case 'holes_view_add':
+    $course_id = intval($_POST['course_id']);
+    $course = get_course($course_id);
         // Display Add page
         include 'holes_add.php';
         break;
 
     case 'holes_add':
-            add_hole();
+            add_holes_by_course();
             redirect($app_path . 'admin/course');
+        break;
+
+    case 'holes_view_edit':
+        // Get course data
+        $course_id = intval($_POST['course_id']);
+        $course = get_course($course_id);
+        $courseName = $course['courseName'];
+        $holesF9 = get_F9_by_course($course_id);
+        $holesB9 = get_B9_by_course($course_id);
+
+        // Display Edit page
+        include 'holes_edit.php';
+
+    break;
+
+    case 'holes_edit':
+        $course_id =  intval($_POST['course_id']);
+        update_course(
+        $course_id,
+        $_POST['name'],
+        $_POST['city'],
+        $_POST['province'],
+        $_POST['tel'],
+        $_POST['website'],
+        $_POST['email'],
+        $_POST['rating'],
+        $_POST['slope'],
+        $_POST['parOut'],
+        $_POST['parIn'],
+        $_POST['parTotal'],
+        $_POST['mOut'],
+        $_POST['mIn'],
+        $_POST['mTotal']
+        );
+        redirect($app_path . 'admin/course');
+        break;
+
+
+    case 'holes_view_delete_confirm':
+        $course_id = intval($_POST['course_id']);
+        $course = get_course($course_id);
+        $courseName = $course['courseName'];
+
+        include 'holes_delete.php';
+        break;
+
+    case 'holes_delete':
+        $course_id = intval($_POST['course_id']);
+        delete_holes_by_course($course_id);
+        redirect($app_path . 'admin/course');
         break;
 
 

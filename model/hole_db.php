@@ -20,6 +20,50 @@ function get_holes_by_course($course_id) {
     }
 }
 
+function get_F9_by_course($course_id) {
+    global $db;
+    $query = '
+        SELECT `holeNo`, `meters`, `par`, `stroke`
+        FROM holes h
+           INNER JOIN courses c
+           ON h.courseID = c.courseID
+        WHERE h.courseID = :course_id
+        AND holeNo <= 9';
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':course_id', $course_id);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+    }
+}
+
+function get_B9_by_course($course_id) {
+    global $db;
+    $query = '
+        SELECT `holeNo`, `meters`, `par`, `stroke`
+        FROM holes h
+           INNER JOIN courses c
+           ON h.courseID = c.courseID
+        WHERE h.courseID = :course_id
+        AND holeNo > 9';
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':course_id', $course_id);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+    }
+}
+
 function get_hole($hole_id) {
     global $db;
     $query = '
@@ -48,7 +92,7 @@ function get_hole($hole_id) {
 //                VALUES
 //                ('$courseID', '1', '$h1_par', '$h1_si', '$h1_meter'),
 
-function add_hole() {
+function add_holes_by_course() {
     global $db;
     $keys = array_keys($_POST['holeNo']);
     foreach ( $keys as $key ) {
@@ -81,16 +125,6 @@ function add_hole() {
              display_db_error($error_message);
          }
      }
-
-
-        //    $error_message = $e->getMessage();
-        //     display_db_error($error_message);
-
-
-
-
-
-
     // $query = 'INSERT INTO holes
     //              (courseID,holeNo,par,stroke,meters)
     //           VALUES
@@ -143,12 +177,12 @@ function update_hole($hole_id, $code, $name, $desc,
     }
 }
 
-function delete_hole($hole_id) {
+function delete_holes_by_course($course_id) {
     global $db;
-    $query = 'DELETE FROM holes WHERE holeID = :hole_id';
+    $query = 'DELETE FROM holes WHERE courseID = :course_id';
     try {
         $statement = $db->prepare($query);
-        $statement->bindValue(':hole_id', $hole_id);
+        $statement->bindValue(':course_id', $course_id);
         $statement->execute();
         $statement->closeCursor();
     } catch (PDOException $e) {
