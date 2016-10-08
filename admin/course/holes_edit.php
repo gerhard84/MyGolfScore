@@ -1,9 +1,13 @@
 <?php
 require_once('../../util/main.php');
 include 'view/header.php';
-//include ('view/navbar_admin.php');
+include ('view/navbar_admin.php');
 require_once('model/course_db.php');
 require_once('model/hole_db.php');
+
+ 	//echo	'<pre>';
+ 	//var_dump($_POST);
+ //	echo'</pre>';
 ?>
 <div class="container">
 
@@ -14,18 +18,19 @@ require_once('model/hole_db.php');
 			 <input type="hidden" name="action" value="holes_edit" >
 			 <input type="hidden" name="course_id" value="<?php echo $course_id ?>" >
 
+
 			<div class="col-md-6">
 				<div class="panel panel-primary">
 					<div class="panel-heading">Front 9</div>
 					<div class="panel-body">
 						<table class="table table-striped table-hover width: auto">
-
 							<thead>
 								<tr>
 									<th>Hole</th>
 									<th>Meters</th>
 									<th>Par</th>
 									<th>SI</th>
+									<th>Edit</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -34,27 +39,26 @@ require_once('model/hole_db.php');
 									<th>Meters</th>
 									<th>Par</th>
 									<th>SI</th>
+									<th>Edit</th>
 								</tr>
 							</tfoot>
 							<tbody>
-								<?php
-
-									foreach ($holesF9 as $hole) :
-									echo "<tr>";
-									echo "<td><input class='form-control' type='hidden' name='holeNo[]' id='holeNo[]' value='$hole[holeNo] '>$hole[holeNo]</td>";
-									echo "<div class='col-xs-3'>";
-									echo "<td><input class='form-control' type='number' name='meters[]' id='meters[]' value='$hole[meters]' required value=''></td>";
-									echo "</div>";
-									echo "<div class='col-xs-3'>";
-									echo "<td><input class='form-control' type='number' name='par[]' id='par[]' value='$hole[par]' required value=''></td>";
-									echo "</div>";
-									echo "<div class='col-xs-3'>";
-									echo "<td><input class='form-control' type='number' name='stroke[]' id='stroke[]' value='$hole[stroke]' required value=''></td>";
-									echo "</div>";
-									echo "</tr>";
-									endforeach;
-								?>
-
+							<?php foreach ($holesF9 as $hole) : ?>
+									<tr>
+									<td><?php echo $hole['holeNo'];?></td>
+									<td><?php echo $hole['meters'];?></td>
+									<td><?php echo $hole['par'];?></td>
+									<td><?php echo $hole['stroke'];?></td>
+									<td>
+											<form action="" method="post">
+													<input type="hidden" name="action" value="hole_view_edit">
+													<input type="hidden" name="course_id" value="<?php echo $course['courseID'];?>">
+													<input type="hidden" name="hole_id" value="<?php echo $hole['holeID'];?>">
+													<button type="submit" class="btn btn-warning btn-sm">Edit</button>
+											</form>
+									</td>
+									</tr>
+								<?php endforeach; ?>
 							</tbody>
 						</table>
 					</div>
@@ -72,6 +76,7 @@ require_once('model/hole_db.php');
 									<th>Meters</th>
 									<th>Par</th>
 									<th>SI</th>
+									<th>Edit</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -80,38 +85,37 @@ require_once('model/hole_db.php');
 									<th>Meters</th>
 									<th>Par</th>
 									<th>SI</th>
+									<th>Edit</th>
 								</tr>
 							</tfoot>
 							<tbody>
-								<?php
-
-									foreach ($holesB9 as $hole) :
-									echo "<tr>";
-									echo "<td><input class='form-control' type='hidden' name='holeNo[]' id='holeNo[]' value='$hole[holeNo] '>$hole[holeNo]</td>";
-									echo "<div class='col-xs-3'>";
-									echo "<td><input class='form-control' type='number' name='meters[]' id='meters[]' value='$hole[meters]' required value=''></td>";
-									echo "</div>";
-									echo "<div class='col-xs-3'>";
-									echo "<td><input class='form-control' type='number' name='par[]' id='par[]' value='$hole[par]' required value=''></td>";
-									echo "</div>";
-									echo "<div class='col-xs-3'>";
-									echo "<td><input class='form-control' type='number' name='stroke[]' id='stroke[]' value='$hole[stroke]' required value=''></td>";
-									echo "</div>";
-									echo "</tr>";
-									endforeach;
-								?>
+							<?php foreach ($holesB9 as $hole) : ?>
+									<tr>
+									<td><?php echo $hole['holeNo'];?></td>
+									<td><?php echo $hole['meters'];?></td>
+									<td><?php echo $hole['par'];?></td>
+									<td><?php echo $hole['stroke'];?></td>
+									<td>
+											<form action="" method="post">
+													<input type="hidden" name="action" value="hole_view_edit">
+													<input type="hidden" name="course_id" value="<?php echo $course['courseID'];?>">
+													<input type="hidden" name="hole_id" value="<?php echo $hole['holeID'];?>">
+													<button type="submit" class="btn btn-warning btn-sm">Edit</button>
+											</form>
+									</td>
+									</tr>
+								<?php endforeach; ?>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-			<div class="form-group">
-				<input type="submit" name="" value="Add Holes" class="btn btn-primary" />
-			</div>
 		</form>
+		<div class="form-group">
 		<form action="" method="post" >
 					<input type="submit" value="Cancel" class="btn btn-danger form-control"/>
 			</form>
+			</div>
 	</div>
 </div>
 <?php include "view/footer.php";?>

@@ -1,8 +1,11 @@
 <?php include '../view/header.php'; ?>
 <?php include '../view/navbar.php'; ?>
+
 <div id="content">
     <h1 class="top">My Profile</h1>
-    <p><?php echo $player_name . ' (' . $email . ')'; ?></p>
+    <p><?php echo $player_name . " (" . $email . ")" . " - Logins: ".$logins[0] ; ?></p>
+
+
     <form action="" method="post">
         <input type="hidden" name="action" value="view_profile_edit" />
         <input type="submit" value="Edit Profile" />

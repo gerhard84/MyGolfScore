@@ -95,16 +95,14 @@ switch ($action) {
                 // TO DO: Improve this validation
                 if (is_valid_player_login($email, $password)) {
                     $_SESSION['user'] = get_player_by_email($email);
+                    // Increment logins
+                    increment_logins($email);
+
                 } else {
                     display_error('Login failed. Invalid email or password.');
                 }
-                // If necessary, redirect to the Checkout app
-        if (isset($_SESSION['checkout'])) {
-            unset($_SESSION['checkout']);
-            redirect('../checkout');
-        } else {
+
             redirect('.');
-        }
         break;
 
     case 'view_profile':
@@ -112,9 +110,9 @@ switch ($action) {
                             $_SESSION['user']['lastName'];
         $email = $_SESSION['user']['email'];
         $town = $_SESSION['user']['town'];
+        $player_id = ($_SESSION['user']['playerID']);
+        $logins = login_count($player_id);
 
-
-        //$rounds = get_rounds_by_player_id($_SESSION['user']['playerID']);
 
         include 'profile_view.php';
         break;
@@ -128,7 +126,7 @@ switch ($action) {
         break;
 
     case 'update_account':
-        // Get the customer data
+        // Get the player data
         $player_id = $_SESSION['user']['playerID'];
         $email = $_POST['email'];
         $town = $_POST['town'];
@@ -164,11 +162,11 @@ switch ($action) {
             }
         }
 
-        // Update the customer data
+        // Update the player data
         update_player($player_id, $email, $first_name, $last_name,
             $password_1, $password_2, $town);
 
-        // Set the new customer data in the session
+        // Set the new player data in the session
         $_SESSION['user'] = get_player($player_id);
 
         redirect('.');

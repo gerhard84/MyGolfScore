@@ -115,4 +115,27 @@ function player_count() {
     $statement->closeCursor();
     return $result['playerCount'];
 }
+
+function increment_logins($email) {
+    global $db;
+    $query = "UPDATE players
+                SET logins = logins+1
+                WHERE email = :email";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':email', $email);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
+function login_count($player_id) {
+global $db;
+$query = 'SELECT logins FROM players WHERE playerID = :player_id';
+$statement = $db->prepare($query);
+$statement->bindValue(':player_id', $player_id);
+$statement->execute();
+$result = $statement->fetch();
+$statement->closeCursor();
+return $result;
+}
+
 ?>

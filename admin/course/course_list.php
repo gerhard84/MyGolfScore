@@ -1,7 +1,12 @@
 <?php require_once('../../util/main.php');
  include 'view/header.php';
  include ('view/navbar_admin.php');
- require_once('model/course_db.php'); ?>
+ require_once('model/course_db.php');
+
+  	//echo	'<pre>';
+  	//var_dump($_POST);
+  	//echo'</pre>';
+  ?>
  <div class="container">
 
      <div class="col-md-8 col-md-offset-1">
@@ -88,7 +93,7 @@
                     <td>
                         <form action="" method="post">
                             <input type="hidden" name="action" value="holes_view_delete_confirm">
-                            <input type="hidden" name="course_id" value="<?php echo $course['courseID'];?>">                            
+                            <input type="hidden" name="course_id" value="<?php echo $course['courseID'];?>">
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </td>

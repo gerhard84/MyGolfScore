@@ -1,5 +1,5 @@
 <?php
-require_once('../../util/main.php');
+require_once('util/main.php');
 //Select all layers
 $query = $db->prepare('SELECT * from players');
 $query->execute();
@@ -36,8 +36,8 @@ $query->execute();
                   <tbody>
                     <?php while( $row = $query->fetch(PDO::FETCH_ASSOC) ) { ?>
                       <tr>
-                        <td><?php echo $row['name']; ?></td>
-                        <td><?php echo $row['surname']; ?></td>
+                        <td><?php echo $row['firstName']; ?></td>
+                        <td><?php echo $row['lastName']; ?></td>
                         <td><?php echo $row['email']; ?></td>
                         <td><?php echo $row['town']; ?></td>
                         <td><?php echo $row['logins']; ?></td>
