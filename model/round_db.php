@@ -1,5 +1,50 @@
 <?php
 
+
+function get_F9_score($course_id) {
+    global $db;
+    $query = "SELECT `holeNo`, `meters`, `par`, `stroke`
+                FROM holes h
+                INNER JOIN courses c
+                ON h.courseID = c.courseID
+                WHERE h.courseID = :course_id
+                AND holeNo <= 9";
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':course_id', $course_id);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+    }
+}
+
+function get_B9_score($course_id) {
+    global $db;
+    $query = "SELECT `holeNo`, `meters`, `par`, `stroke`
+                FROM holes h
+                INNER JOIN courses c
+                ON h.courseID = c.courseID
+                WHERE h.courseID = :course_id
+                AND holeNo > 9";
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':course_id', $course_id);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+    }
+}
+
+
+
 // This function calculates a shipping charge of $5 per item
 // but it only charges shipping for the first 5 items
 function shipping_cost() {
@@ -178,13 +223,13 @@ function delete_order($order_id) {
     $statement->closeCursor();
 }
 
-function course_count() {
-    global $db;
-    $query = 'SELECT count(*) AS courseCount FROM courses';
-    $statement = $db->prepare($query);
-    $statement->execute();
-    $result = $statement->fetch();
-    $statement->closeCursor();
-    return $result['courseCount'];
-}
+// function course_count() {
+//     global $db;
+//     $query = 'SELECT count(*) AS courseCount FROM courses';
+//     $statement = $db->prepare($query);
+//     $statement->execute();
+//     $result = $statement->fetch();
+//     $statement->closeCursor();
+//     return $result['courseCount'];
+// }
 ?>

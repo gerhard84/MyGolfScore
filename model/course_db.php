@@ -1,13 +1,13 @@
 <?php
 function get_courses() {
     global $db;
-    $query = 'SELECT *,
+    $query = "SELECT *,
                 (SELECT COUNT(*)
                  FROM holes
                  WHERE holes.courseID = courses.courseID)
                  AS holeCount
               FROM courses
-              ORDER BY courseID';
+              ORDER BY courseID";
     try {
         $statement = $db->prepare($query);
         $statement->execute();
@@ -22,10 +22,9 @@ function get_courses() {
 
 function get_course($course_id) {
     global $db;
-    $query = '
-        SELECT *
-        FROM courses
-        WHERE courseID = :course_id';
+    $query = "SELECT *
+                FROM courses
+                WHERE courseID = :course_id";
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':course_id', $course_id);
@@ -43,12 +42,12 @@ function add_course($name, $city, $province, $tel, $website, $email, $rating,
                     $slope, $parOut, $parIn, $parTotal, $mOut, $mIn, $mTotal)
                     {
     global $db;
-    $query = 'INSERT INTO courses
+    $query = "INSERT INTO courses
                  (courseName, city, province, tel, website, email, rating,
                     slope, parOut, parIn, parTotal, mOut, mIn, mTotal)
               VALUES
                  (:name, :city, :province, :tel, :website, :email, :rating,
-                    :slope, :parOut, :parIn, :parTotal, :mOut, :mIn, :mTotal)';
+                    :slope, :parOut, :parIn, :parTotal, :mOut, :mIn, :mTotal)";
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':name', $name);
@@ -80,23 +79,22 @@ function add_course($name, $city, $province, $tel, $website, $email, $rating,
 function update_course($course_id, $name, $city, $province, $tel, $website, $email, $rating,
                     $slope, $parOut, $parIn, $parTotal, $mOut, $mIn, $mTotal) {
     global $db;
-    $query = '
-        UPDATE courses
-        SET courseName = :name,
-            city = :city,
-            province = :province,
-            tel = :tel,
-            website = :website,
-            email = :email,
-            rating = :rating,
-            slope = :slope,
-            parOut = :parOut,
-            parIn = :parIn,
-            parTotal = :parTotal,
-            mOut = :mOut,
-            mIn = :mIn,
-            mTotal = :mTotal
-        WHERE courseID = :course_id';
+    $query = "UPDATE courses
+                SET courseName = :name,
+                    city = :city,
+                    province = :province,
+                    tel = :tel,
+                    website = :website,
+                    email = :email,
+                    rating = :rating,
+                    slope = :slope,
+                    parOut = :parOut,
+                    parIn = :parIn,
+                    parTotal = :parTotal,
+                    mOut = :mOut,
+                    mIn = :mIn,
+                    mTotal = :mTotal
+                WHERE courseID = :course_id";
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':course_id', $course_id);
@@ -125,7 +123,8 @@ function update_course($course_id, $name, $city, $province, $tel, $website, $ema
 
 function delete_course($course_id) {
     global $db;
-    $query = 'DELETE FROM courses WHERE courseID = :course_id';
+    $query = "DELETE FROM courses
+                WHERE courseID = :course_id";
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':course_id', $course_id);
@@ -139,7 +138,9 @@ function delete_course($course_id) {
 
 function course_count() {
     global $db;
-    $query = 'SELECT count(*) AS courseCount FROM courses';
+    $query = "SELECT count(*)
+                AS courseCount
+                FROM courses";
     $statement = $db->prepare($query);
     $statement->execute();
     $result = $statement->fetch();

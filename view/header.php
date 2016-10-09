@@ -13,8 +13,11 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo $app_path ?>assets/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="<?php echo $app_path ?>assets/datatables.min.css"/>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/themes/smoothness/jquery-ui.css" />
 
-<script type="text/javascript" src="<?php echo $app_path ?>assets/datatables.min.js"></script>
+
 <script type="text/javascript" src="<?php echo $app_path ?>assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?php echo $app_path ?>assets/datatables.min.js"></script>
+
 
 </head>

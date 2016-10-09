@@ -16,7 +16,7 @@
     <ul class="nav navbar-nav">
       <li><a href="<?php echo $app_path; ?>">Home</a></li>
 					<?php if (isset($_SESSION['user'])) : ?>
-            <li><a href="scoreAdd.php">Submit Score</a></li>
+            <li><a href="<?php echo $app_path; ?>score">Submit Score</a></li>
 						<?php else: ?>
 							<li><a href="<?php echo $account_url; ?>">Submit Score</a></li>
 							<?php endif; ?>
