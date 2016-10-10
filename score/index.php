@@ -9,6 +9,7 @@ require_once('model/player_db.php');
 require_once('model/hole_db.php');
 require_once('model/round_db.php');
 require_once('model/course_db.php');
+require_once('model/handicap_db.php');
 
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -116,6 +117,7 @@ switch ($action) {
         $course = $_POST['course'];
         $date = $_POST['date'];
         $holes = $_POST['holes'];
+        $handicap = get_handicap($player_id);
 
 
 
