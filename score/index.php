@@ -118,6 +118,8 @@ switch ($action) {
         $date = $_POST['date'];
         $holes = $_POST['holes'];
         $handicap = get_handicap($player_id);
+        $front9 = get_F9($course_id);
+        $back9 = get_B9($course_id);
 
 
 

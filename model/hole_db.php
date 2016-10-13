@@ -183,4 +183,53 @@ function delete_holes($course_id) {
         display_db_error($error_message);
     }
 }
+
+
+function get_si_F9($course_id) {
+    global $db;
+    $query = "SELECT `stroke`
+                FROM holes h
+                INNER JOIN courses c
+                ON h.courseID = c.courseID
+                WHERE h.courseID = :course_id
+                AND holeNo <= 9";
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':course_id', $course_id);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+    }
+}
+
+
+
+
+function get_si_B9($course_id){
+    global $db;
+    $query = "SELECT `stroke`
+                FROM holes h
+                INNER JOIN courses c
+                ON h.courseID = c.courseID
+                WHERE h.courseID = :course_id
+                AND holeNo > 9";
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':course_id', $course_id);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+    }
+    }
+
+
+
 ?>

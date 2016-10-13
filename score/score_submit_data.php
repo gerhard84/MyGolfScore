@@ -113,14 +113,27 @@ function totalCal(){
   							<thead>
   								<tr>
                     <th>Hole</th>
-                    <?php for($i=1;$i<=9;$i++) { ?>
+                          <?php for($i=1;$i<=9;$i++) { ?>
   									<th><?php echo $i;?></th>
-                    <?php } ?>
+                          <?php } ?>
                     <th>Gross</th>
                     <th>Net</th>
   								</tr>
+
   							</thead>
                 <tbody>
+                  <tr>
+                    <th>Par</th>
+                  <?php foreach ($front9 as $f9) { ?>
+                    <th><?php echo $f9['par'];?></th>
+                  <?php } ?>
+                  </tr>
+                  <tr>
+                    <th>Stroke</th>
+                  <?php foreach ($front9 as $f9) { ?>
+                    <th><?php echo $f9['stroke'];?></th>
+                  <?php } ?>
+                  </tr>
   									<tr>
                       <th>Score</th>
                     <?php for($i=1;$i<=9;$i++) { ?>
@@ -129,6 +142,7 @@ function totalCal(){
   									<td><input class='form-control' type='text' name='f9Gross' id='f9Gross' value='0' required readonly="readonly"></td>
                     <td><input class='form-control' type='text' name='f9Total' id='f9Total' value='0' required readonly="readonly"></td>
   									</tr>
+
   							</tbody>
   						</table>
 
@@ -139,12 +153,24 @@ function totalCal(){
                     <th>Hole</th>
                     <?php for($i=10;$i<=18;$i++) { ?>
   									<th><?php echo $i;?></th>
-                    <?php } ?>
+                    <?php } ?>                  
                     <th>Gross</th>
                     <th>Net</th>
   								</tr>
   							</thead>
                 <tbody>
+                  <tr>
+                    <th>Par</th>
+                  <?php foreach ($back9 as $b9) { ?>
+                    <th><?php echo $b9['par'];?></th>
+                  <?php } ?>
+                  </tr>
+                  <tr>
+                    <th>Stroke</th>
+                  <?php foreach ($back9 as $b9) { ?>
+                    <th><?php echo $b9['stroke'];?></th>
+                  <?php } ?>
+                  </tr>
   									<tr>
                       <th>Score</th>
                     <?php for($i=1;$i<=9;$i++) { ?>
