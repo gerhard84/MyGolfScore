@@ -6,7 +6,7 @@ echo'</pre>';
 
 <?php
 require_once('../util/main.php');
-include 'view/header.php';
+include ('view/header.php');
 include ('view/navbar.php');
 //require_once('model/course_db.php');
 //require_once('model/hole_db.php');
@@ -45,7 +45,10 @@ include ('view/navbar.php');
                   <div class="form-group">
                       <label class="control-label col-sm-4" for="date">Date:</label>
                       <div class="col-sm-8">
-                          <input required class="form-control" id="date" name="date" placeholder="DD/MM/YYY" type="text"/>
+                          <input required type="text" class="form-control" placeholder='DD/MM/YYYY' id="roundDate" name="roundDate"
+                           data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-end-date='0d' data-date-autoclose=true
+                           data-date-clear-btn=true data-date-today-highlight=true
+                           />
                       </div>
                   </div>
 
@@ -60,24 +63,23 @@ include ('view/navbar.php');
                         </label>
                       </div>
                   </div>
-
                   </div>
                 </div>
                 <div class="form-group">
                         <input type="submit" name="next" value="Next" class="btn btn-primary" />
                     </div>
-
                   </div>
             </form>
               </div>
               </div>
 
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-              <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+              <!-- JS and CSS for autocomplete and datepicker -->
+              <link rel="stylesheet" type="text/css" href="<?php echo $app_path ?>assets/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" />
+              <script type="text/javascript" src="<?php echo $app_path ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+              <script type="text/javascript" src="<?php echo $app_path ?>assets/jQuery-2.2.3/jquery-2.2.3.min.js"></script>
+              <script type="text/javascript" src="<?php echo $app_path ?>assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 
-              <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
+              <!-- autocomplete playerSearch -->
               <script type="text/javascript">
                 $(document).ready(function(){
                   $('#playerSearch').autocomplete({
@@ -104,7 +106,7 @@ include ('view/navbar.php');
 
               });
               </script>
-
+              <!-- autocomplete courseSearch -->
               <script type="text/javascript">
                 $(document).ready(function(){
                   $('#courseSearch').autocomplete({
@@ -130,20 +132,4 @@ include ('view/navbar.php');
                  });
 
               });
-              </script>
-
-              <!-- Include Date Range Picker -->
-
-
-              <script>
-                $(document).ready(function(){
-                  var date_input=$('input[name="date"]'); //our date input has the name "date"
-                  var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-                  date_input.datepicker({
-                    format: 'dd/mm/yyyy',
-                    container: container,
-                    todayHighlight: true,
-                    autoclose: true,
-                  })
-                })
               </script>

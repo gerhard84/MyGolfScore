@@ -53,7 +53,7 @@ function F9netCal(){
   $("input[name^=f9Total]").calc(
     "f9Gross - hcap",
     {
-  		hcap: $("input[name^=hcap]"),
+  		hcap: $("h3[name^=hcap]"),
   		f9Gross: $("input[name^=f9Gross]")
   	},
     function ($this){
@@ -68,7 +68,7 @@ function B9netCal(){
   $("input[name^=b9Total]").calc(
     "b9Gross - hcap",
     {
-  		hcap: $("input[name^=hcap]"),
+  		hcap: $("h3[name^=hcap]"),
   		b9Gross: $("input[name^=b9Gross]")
   	},
     function ($this){
@@ -101,8 +101,7 @@ function totalCal(){
       <h3>Course: <?php echo $course?> </h3>
       <h3>Date: <?php echo $date?> </h3>
       <h3>Player: <?php echo $player?></h3>
-
-      <input size="2" type='text' name='hcap' id='hcap' value='<?php echo $handicap[0]?>' readonly="readonly"></td>
+      <h3 name='hcap' id='hcap'>Handicap: <?php echo $handicap[0]?></h3>
   		<form action="" method="post" class="form-horizontal" >
         <input type="hidden" name="action" value="view_submit_data" />
   			<div class="col-md-12">
@@ -153,7 +152,7 @@ function totalCal(){
                     <th>Hole</th>
                     <?php for($i=10;$i<=18;$i++) { ?>
   									<th><?php echo $i;?></th>
-                    <?php } ?>                  
+                    <?php } ?>
                     <th>Gross</th>
                     <th>Net</th>
   								</tr>
@@ -183,19 +182,18 @@ function totalCal(){
   						</table>
               <?php } ?>
 
-              <input class='form-control' type='text' name='total' id='total' value='0' required readonly="readonly">
-
-
-
-
-
-
-
-
-
+              <div class="form-group">
+              <label class="control-label col-sm-11" for="total">Total:</label>
+                  <div class="col-sm-1">
+                      <input class='form-control' type='text' name='total' id='total' value='0' required readonly="readonly">
+                  </div>
+              </div>
+            </div>
 
             </div>
-            </div>
+            <div class="form-group">
+                    <input type="submit" name="submit_score" value="Submit" class="btn btn-primary" />
+                </div>
             </div>
 
           </form>
