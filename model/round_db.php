@@ -1,6 +1,5 @@
 <?php
 
-
 function get_F9_score($course_id) {
     global $db;
     $query = "SELECT `holeNo`, `meters`, `par`, `stroke`
@@ -43,193 +42,92 @@ function get_B9_score($course_id) {
     }
 }
 
+function add_scorecard($course_id, $play_date, $holes_played) {
+    global $db;
 
+    $query = "INSERT INTO scorecard (courseID, playDate, holesPlayed)
+                VALUES (:course_id, :play_date, :holes_played)";
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':course_id', $course_id);
+        $statement->bindValue(':play_date', $play_date);
+        $statement->bindValue(':holes_played', $holes_played);
+        $statement->execute();
+        $statement->closeCursor();
 
-// This function calculates a shipping charge of $5 per item
-// but it only charges shipping for the first 5 items
-function shipping_cost() {
-    $item_count = cart_item_count();
-    $item_shipping = 5;   // $5 per item
-    if ($item_count > 5) {
-        $shipping_cost = $item_shipping * 5;
-    } else {
-        $shipping_cost = $item_shipping * $item_count;
-    }
-    return $shipping_cost;
-}
-
-// This function calcualtes the sales tax,
-// but only for orders in California (CA)
-function tax_amount($subtotal) {
-    $shipping_address = get_address($_SESSION['user']['shipAddressID']);
-    $state = $shipping_address['state'];
-    $state = strtoupper($state);
-    switch ($state) {
-        case 'CA': $tax_rate = 0.09; break;
-        default: $tax_rate = 0; break;
-    }
-    return round($subtotal * $tax_rate, 2);
-}
-
-function card_name($card_type) {
-    switch($card_type){
-        case 1:
-           return 'MasterCard';
-           break;
-        case 2:
-            return 'Visa';
-            break;
-        case 3:
-            return 'Discover';
-            break;
-        case 4:
-            return 'American Express';
-            break;
-        default:
-            return 'Unknown Card Type';
-            break;
+        $scorecard_id = $db->lastInsertId('scorecard');
+        return $scorecard_id;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
     }
 }
 
-function add_order($card_type, $card_number, $card_cvv, $card_expires) {
+function add_round($scorecard_id, $player_id, $handicap) {
     global $db;
-    $customer_id = $_SESSION['user']['customerID'];
-    $billing_id = $_SESSION['user']['billingAddressID'];
-    $shipping_id = $_SESSION['user']['shipAddressID'];
-    $shipping_cost = shipping_cost();
-    $tax = tax_amount(cart_subtotal());
-    $order_date = date("Y-m-d H:i:s");
+    $keys = array_keys($_POST['holeNo']);
+    foreach ( $keys as $key ) {
+        $holeNo = ($_POST['holeNo'][$key]);
+        $score = ($_POST['score'][$key]);
 
-    $query = '
-         INSERT INTO orders (customerID, orderDate, shipAmount, taxAmount,
-                             shipAddressID, cardType, cardNumber,
-                             cardExpires, billingAddressID)
-         VALUES (:customer_id, :order_date, :ship_amount, :tax_amount,
-                 :shipping_id, :card_type, :card_number,
-                 :card_expires, :billing_id)';
+    $query = 'INSERT INTO round (playerID, scorecardID,
+                                hole, score, handicap)
+                VALUES (:player_id, :scorecard_id,
+                            :hole, :score, :handicap)';
     $statement = $db->prepare($query);
-    $statement->bindValue(':customer_id', $customer_id);
-    $statement->bindValue(':order_date', $order_date);
-    $statement->bindValue(':ship_amount', $shipping_cost);
-    $statement->bindValue(':tax_amount', $tax);
-    $statement->bindValue(':shipping_id', $shipping_id);
-    $statement->bindValue(':card_type', $card_type);
-    $statement->bindValue(':card_number', $card_number);
-    $statement->bindValue(':card_expires', $card_expires);
-    $statement->bindValue(':billing_id', $billing_id);
+    $statement->bindValue(':player_id', $player_id);
+    $statement->bindValue(':scorecard_id', $scorecard_id);
+    //$statement->bindValue(':gross', $gross);
+    //$statement->bindValue(':net', $net);
+    $statement->bindValue(':hole', $holeNo);
+    $statement->bindValue(':score', $score);
+    $statement->bindValue(':handicap', $handicap);
     $statement->execute();
-    $order_id = $db->lastInsertId();
+    }
+
+    try {
     $statement->closeCursor();
-    return $order_id;
+     //Get the last hole ID that was automatically generated
+        $round_id = $db->lastInsertId();
+         return $round_id;
+     } catch (PDOException $e) {
+         $error_message = $e->getMessage();
+         display_db_error($error_message);
+     }
+    }
+
+function get_rounds_by_player_id($player_id) {
+    global $db;
+    $query = 'SELECT * FROM round WHERE playerID = :player_id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':player_id', $player_id);
+    $statement->execute();
+    $rounds = $statement->fetchAll();
+    $statement->closeCursor();
+    return $rounds;
 }
 
-function add_order_item($order_id, $product_id,
-                        $item_price, $discount, $quantity) {
+function delete_round($round_id) {
     global $db;
-    $query = '
-        INSERT INTO OrderItems (orderID, productID, itemPrice,
-                                discountAmount, quantity)
-        VALUES (:order_id, :product_id, :item_price, :discount, :quantity)';
+    $query = 'DELETE FROM round WHERE roundID = :$round_id';
     $statement = $db->prepare($query);
-    $statement->bindValue(':order_id', $order_id);
-    $statement->bindValue(':product_id', $product_id);
-    $statement->bindValue(':item_price', $item_price);
-    $statement->bindValue(':discount', $discount);
-    $statement->bindValue(':quantity', $quantity);
-    $statement->execute();
-    $statement->closeCursor();
-}
-
-function get_order($order_id) {
-    global $db;
-    $query = 'SELECT * FROM orders WHERE orderID = :order_id';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':order_id', $order_id);
-    $statement->execute();
-    $order = $statement->fetch();
-    $statement->closeCursor();
-    return $order;
-}
-
-function get_order_items($order_id) {
-    global $db;
-    $query = 'SELECT * FROM OrderItems WHERE orderID = :order_id';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':order_id', $order_id);
-    $statement->execute();
-    $order_items = $statement->fetchAll();
-    $statement->closeCursor();
-    return $order_items;
-}
-
-function get_orders_by_customer_id($customer_id) {
-    global $db;
-    $query = 'SELECT * FROM orders WHERE customerID = :customer_id';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':customer_id', $customer_id);
-    $statement->execute();
-    $order = $statement->fetchAll();
-    $statement->closeCursor();
-    return $order;
-}
-
-function get_unfilled_orders() {
-    global $db;
-    $query = 'SELECT * FROM orders
-              INNER JOIN customers
-              ON customers.customerID = orders.customerID
-              WHERE shipDate IS NULL ORDER BY orderDate';
-    $statement = $db->prepare($query);
-    $statement->execute();
-    $orders = $statement->fetchAll();
-    $statement->closeCursor();
-    return $orders;
-}
-
-function get_filled_orders() {
-    global $db;
-    $query =
-        'SELECT * FROM orders
-         INNER JOIN customers
-         ON customers.customerID = orders.customerID
-         WHERE shipDate IS NOT NULL ORDER BY orderDate';
-    $statement = $db->prepare($query);
-    $statement->execute();
-    $orders = $statement->fetchAll();
-    $statement->closeCursor();
-    return $orders;
-}
-
-function set_ship_date($order_id) {
-    global $db;
-    $ship_date = date("Y-m-d H:i:s");
-    $query = '
-         UPDATE orders
-         SET shipDate = :ship_date
-         WHERE orderID = :order_id';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':ship_date', $ship_date);
-    $statement->bindValue(':order_id', $order_id);
+    $statement->bindValue(':$round_id', $$round_id);
     $statement->execute();
     $statement->closeCursor();
 }
 
-function delete_order($order_id) {
-    global $db;
-    $query = 'DELETE FROM orders WHERE orderID = :order_id';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':order_id', $order_id);
-    $statement->execute();
-    $statement->closeCursor();
+ function rounds_count() {
+     global $db;
+     $query = 'SELECT count(*) AS roundsCount FROM round';
+     $statement = $db->prepare($query);
+     $statement->execute();
+     $result = $statement->fetch();
+     $statement->closeCursor();
+     return $result['roundsCount'];
+ }
+
+function calculate_gross() {
+
 }
 
-// function course_count() {
-//     global $db;
-//     $query = 'SELECT count(*) AS courseCount FROM courses';
-//     $statement = $db->prepare($query);
-//     $statement->execute();
-//     $result = $statement->fetch();
-//     $statement->closeCursor();
-//     return $result['courseCount'];
-// }
 ?>

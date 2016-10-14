@@ -18,7 +18,7 @@ include ('view/navbar.php');
   	<div class="col-md-8 col-md-offset-2">
   		<h1 class="page-header text-center">Submit Score</h1>
 
-  		<form action="" method="post" class="form-horizontal" >
+  		<form action="" method="post" class="form-horizontal">
         <input type="hidden" name="action" value="view_submit_data" />
   			<div class="col-sm-8">
   				<div class="panel panel-primary">
@@ -52,23 +52,20 @@ include ('view/navbar.php');
                       </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="row col-md-12 form-group ">
                       <label class="control-label col-sm-4" for="holes">Holes:</label>
-                      <div class="col-sm-4">
-                        <label class="radio-inline">
+                      <div class=" row col-md-8 ol-md-offset-3">
+                        <label class="radio-inline col-md-1">
                           <input type="radio" name="holes" id="front9" value="9">9
                         </label>
-                        <label class="radio-inline">
+                        <label class="radio-inline col-md-3">
                           <input type="radio" name="holes" id="back9" value="18">18
                         </label>
+                        <input type="submit" name="next" value="Next" class="btn btn-primary col-md-3" />
                       </div>
                   </div>
                   </div>
                 </div>
-                <div class="form-group">
-                        <input type="submit" name="next" value="Next" class="btn btn-primary" />
-                    </div>
-                  </div>
             </form>
               </div>
               </div>
