@@ -6,7 +6,7 @@ require_once('../util/main.php');
 //require_once('util/secure_conn.php');
 
 require_once('model/player_db.php');
-//require_once('model/hole_db.php');
+require_once('model/handicap_db.php');
 //require_once('model/round_db.php');
 //require_once('model/round_db.php');
 
@@ -73,6 +73,8 @@ switch ($action) {
             // Add the player data to the database
             $player_id = add_player($email, $first_name,
                                         $last_name, $password_1, $password_2, $town);
+
+            add_handicap($player_id);
 
             // Set up session data
             unset($_SESSION['form_data']);

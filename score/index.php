@@ -52,13 +52,21 @@ switch ($action) {
     $player_id = $_POST['playerID'];
     $handicap = $_POST['handicap'];
 
+    // echo	'<pre>';
+    // var_dump($_POST);
+    // echo'</pre>';
+    //
+    // break;
+
+    $gross = array_sum($_POST['score']);
+
+    $net = calc_net($gross, $holes_played, $handicap);
+
     $scorecard_id = add_scorecard($course_id, $play_date, $holes_played);
 
-    add_round($scorecard_id, $player_id, $handicap);
+    add_round($scorecard_id, $player_id, $gross, $net, $handicap);
 
     redirect($app_path . 'score');
-
-
 
         break;
 

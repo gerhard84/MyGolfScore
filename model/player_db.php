@@ -58,9 +58,10 @@ function add_player($email, $first_name, $last_name,
                       $password_1, $password_2, $town) {
     global $db;
     $password = sha1($email . $password_1);
-    $query = '
-        INSERT INTO players (email, password, firstName, lastName, town)
-        VALUES (:email, :password, :first_name, :last_name, :town)';
+    $query = 'INSERT INTO players (email, password,
+                                    firstName, lastName, town)
+                VALUES (:email, :password, :first_name,
+                            :last_name, :town)';
     $statement = $db->prepare($query);
     $statement->bindValue(':email', $email);
     $statement->bindValue(':password', $password);

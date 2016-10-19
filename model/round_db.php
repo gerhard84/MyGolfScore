@@ -63,22 +63,22 @@ function add_scorecard($course_id, $play_date, $holes_played) {
     }
 }
 
-function add_round($scorecard_id, $player_id, $handicap) {
+function add_round($scorecard_id, $player_id, $gross, $net, $handicap) {
     global $db;
     $keys = array_keys($_POST['holeNo']);
     foreach ( $keys as $key ) {
         $holeNo = ($_POST['holeNo'][$key]);
         $score = ($_POST['score'][$key]);
 
-    $query = 'INSERT INTO round (playerID, scorecardID,
-                                hole, score, handicap)
-                VALUES (:player_id, :scorecard_id,
-                            :hole, :score, :handicap)';
+    $query = 'INSERT INTO round (playerID, scorecardID, gross,
+                                net, hole, score, handicap)
+                VALUES (:player_id, :scorecard_id, :gross,
+                            :net, :hole, :score, :handicap)';
     $statement = $db->prepare($query);
     $statement->bindValue(':player_id', $player_id);
     $statement->bindValue(':scorecard_id', $scorecard_id);
-    //$statement->bindValue(':gross', $gross);
-    //$statement->bindValue(':net', $net);
+    $statement->bindValue(':gross', $gross);
+    $statement->bindValue(':net', $net);
     $statement->bindValue(':hole', $holeNo);
     $statement->bindValue(':score', $score);
     $statement->bindValue(':handicap', $handicap);
@@ -96,7 +96,7 @@ function add_round($scorecard_id, $player_id, $handicap) {
      }
     }
 
-function get_rounds_by_player_id($player_id) {
+function get_rounds_per_player($player_id) {
     global $db;
     $query = 'SELECT * FROM round WHERE playerID = :player_id';
     $statement = $db->prepare($query);
@@ -126,8 +126,15 @@ function delete_round($round_id) {
      return $result['roundsCount'];
  }
 
-function calculate_gross() {
-
-}
+ function calc_net($gross, $holes_played, $handicap) {
+     if ($holes_played <= 9) {
+         $result =  $gross - ($handicap / 2);
+     }
+     else
+     {
+         $result = $gross - $handicap;
+     }
+     return $result;
+ }
 
 ?>
