@@ -1,15 +1,10 @@
-<?php $pageTitle = "Home Page";?>
 <?php
-
-
-
-
+$pageTitle = "Home Page";
+include 'view/header.php';
  ?>
-
-<?php include 'view/header.php'; ?>
-
 <body>
     <?php include 'view/navbar.php';?>
+
 <div class="container-responsive">
      <header id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->

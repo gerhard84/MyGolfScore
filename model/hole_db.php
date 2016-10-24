@@ -2,10 +2,10 @@
 function get_holes($course_id) {
     global $db;
     $query = "SELECT *
-                FROM holes p
+                FROM holes h
                 INNER JOIN courses c
-                ON p.courseID = c.courseID
-                WHERE p.courseID = :course_id";
+                ON h.courseID = c.courseID
+                WHERE h.courseID = :course_id";
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':course_id', $course_id);

@@ -2,6 +2,7 @@
 require_once('../../util/main.php');
 //require_once('util/secure_conn.php');
 require_once('model/admin_db.php');
+require_once('model/player_db.php');
 
     include ('view/navbar_admin.php');
 
@@ -22,7 +23,7 @@ if ( admin_count() == 0 ) {
     } elseif ( isset($_GET['action']) ) {
         $action = $_GET['action'];
     } else {
-        $action = 'view_account';
+        $action = 'view_players';
     }
 } elseif ($_POST['action'] == 'login') {
     $action = 'login';
@@ -49,54 +50,8 @@ switch ($action) {
         // Display Admin Menu page
         redirect('..');
         break;
-    case 'create':
-        // Get admin user data
-        $email = $_POST['email'];
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $password_1 = $_POST['password_1'];
-        $password_2 = $_POST['password_2'];
 
-        // Set admin user data in session
-        $_SESSION['form_data'] = array();
-        $_SESSION['form_data']['email'] = $email;
-        $_SESSION['form_data']['first_name'] = $first_name;
-        $_SESSION['form_data']['last_name'] = $last_name;
-
-        // Validate admin user data
-        // TO DO: Improve this validation
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            display_error('The e-mail address ' . $email . ' is not valid.');
-        } elseif (is_valid_admin_email($email)) {
-            display_error('The e-mail address ' . $email . ' is already in use.');
-        }
-        if (empty($first_name)) {
-            display_error('First name is a required field.');
-        }
-        if (empty($last_name)) {
-            display_error('Last name is a required field.');
-        }
-        if (empty($password_1) || empty($password_2)) {
-            display_error('Password is a required field.');
-        } elseif ($password_1 !== $password_2) {
-            display_error('Passwords do not match.');
-        } elseif (strlen($password_1) < 6) {
-            display_error('Password must be at least six characters.');
-        }
-
-        // Add admin user
-        $admin_id = add_admin($email, $first_name, $last_name,
-                                 $password_1, $password_2);
-
-        // Set up session data
-        unset($_SESSION['form_data']);
-        if (!isset($_SESSION['admin'])) {
-            $_SESSION['admin'] = get_admin($admin_id);
-        }
-
-        redirect('.');
-        break;
-    case 'view_account':
+    case 'view_players':
         // Get admin user data from session
         $name = $_SESSION['admin']['firstName'] . ' ' .
                 $_SESSION['admin']['lastName'];
@@ -104,9 +59,9 @@ switch ($action) {
         $admin_id = $_SESSION['admin']['adminID'];
 
         // Get all accounts from database
-        $admins = get_all_admins();
+        $players = get_all_players();
 
-        // View admin accounts
+        // View Players
         include 'player_view.php';
         break;
     case 'view_edit':

@@ -1,4 +1,4 @@
-<<?php
+<?php
 // Get Handicap by Player ID
     function get_handicap($player_id) {
     global $db;

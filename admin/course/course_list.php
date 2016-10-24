@@ -30,7 +30,8 @@
 
     <?php if ( count($courses) > 0 ) : ?>
 <div class="col-md-8 col-md-offset-1">
-        <table id="course_list" class="display dt-right" cellspacing="0" width="100%">
+        
+          <table id="course_list" class="table table-striped table-hover" >
             <thead>
                 <tr>
                   <th>Name</th>
@@ -106,11 +107,10 @@
 </div>
 </div>
 <?php include 'view/footer.php'; ?>
-<script type="text/javascript" class="init">
-$(document).ready(function() {
-	$('#course_list').DataTable();
-
-} );
 
 
-	</script>
+  <script language='javascript'>
+      $('#course_list').DataTable( {
+          "autoWidth": true
+      } );
+      </script>

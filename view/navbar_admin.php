@@ -12,7 +12,7 @@
       <ul class="nav navbar-nav">
         <?php if (isset($_SESSION['admin'])) :?>
                 <li><a href="<?php echo $app_path; ?>admin/admin">Admin Home</a></li>
-                <li><a href="<?php echo $app_path; ?>admin/course">Course Manager</a></li>                
+                <li><a href="<?php echo $app_path; ?>admin/course">Course Manager</a></li>
                 <li><a href="<?php echo $app_path; ?>admin/players">Player Manager</a></li>
                 <li><a href="<?php echo $app_path; ?>admin/account">Admin Manager</a></li>
           <?php else: ?>

@@ -11,7 +11,7 @@ $app_path = '/';
 set_include_path($doc_root . $app_path);
 
 // Get common code
-require_once('util/tags.php');
+//require_once('util/tags.php');
 require_once('model/database.php');
 
 // Define some common functions

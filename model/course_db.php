@@ -1,4 +1,5 @@
 <?php
+//Get array with all courses with full details and add holeCount
 function get_courses() {
     global $db;
     $query = "SELECT *,
@@ -19,7 +20,7 @@ function get_courses() {
         display_db_error($error_message);
     }
 }
-
+//Get specified course details
 function get_course($course_id) {
     global $db;
     $query = "SELECT *

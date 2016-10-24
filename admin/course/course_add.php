@@ -1,7 +1,7 @@
 <?php
  include 'view/header.php';
- include ('view/navbar_admin.php');
- require_once('model/course_db.php');
+ include 'view/navbar_admin.php';
+ require_once 'model/course_db.php';
  ?>
 <div class="container">
 
@@ -10,7 +10,7 @@
 
   <form action="" method="post" class="form-horizontal">
       <input type="hidden" name="action" value="course_add" />
-      
+
 
       <div class="form-group">
           <label class="control-label col-sm-4" for="name">Course Name:</label>

@@ -1,6 +1,10 @@
 body {
-  padding-top: 35px; }
+  padding-top: 35px;
+}
 
-  body {
+body {
     padding-bottom: 55px;
 }
+
+/*tr { height: 50px
+}*/

@@ -1,14 +1,11 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 require_once('../util/main.php');
 //require_once('util/secure_conn.php');
-
 require_once('model/player_db.php');
 require_once('model/handicap_db.php');
-//require_once('model/round_db.php');
-//require_once('model/round_db.php');
+require_once('model/round_db.php');
+require_once('model/course_db.php');
+require_once('model/hole_db.php');
 
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -80,13 +77,6 @@ switch ($action) {
             unset($_SESSION['form_data']);
             $_SESSION['user'] = get_player($player_id);
 
-            // Redirect to the Checkout application if necessary
-            if (isset($_SESSION['checkout'])) {
-            unset($_SESSION['checkout']);
-            redirect('../checkout');
-            } else {
-                redirect('.');
-            }
             break;
 
     case 'login':
@@ -94,7 +84,6 @@ switch ($action) {
                 $password = $_POST['password'];
 
                 // If valid username/password, login
-                // TO DO: Improve this validation
                 if (is_valid_player_login($email, $password)) {
                     $_SESSION['user'] = get_player_by_email($email);
                     // Increment logins
@@ -114,6 +103,8 @@ switch ($action) {
         $town = $_SESSION['user']['town'];
         $player_id = ($_SESSION['user']['playerID']);
         $logins = login_count($player_id);
+        $rounds = get_rounds_by_player($player_id);
+        $roundCount = round_count_player($player_id);
 
 
         include 'profile_view.php';

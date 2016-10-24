@@ -1,4 +1,15 @@
 <?php
+function get_all_players() {
+    global $db;
+    $query = 'SELECT playerID, firstName, lastName, email, town, regDate, logins FROM players ORDER BY firstName, lastName ';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $statement->closeCursor();
+    return $result;
+}
+
+
 // Validate email
 function is_valid_player_email($email) {
     global $db;
@@ -130,7 +141,9 @@ function increment_logins($email) {
 
 function login_count($player_id) {
 global $db;
-$query = 'SELECT logins FROM players WHERE playerID = :player_id';
+$query = "SELECT logins
+            FROM players
+            WHERE playerID = :player_id";
 $statement = $db->prepare($query);
 $statement->bindValue(':player_id', $player_id);
 $statement->execute();
@@ -176,8 +189,5 @@ if($num>0){
         die();
     }
 }
-
-
-
 
 ?>

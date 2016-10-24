@@ -1,5 +1,5 @@
 <?php $pageTitle = "Admin - Account";?>
-<?php include '../../view/header.php'; ?>
+<?php include 'view/header.php'; ?>
 <div class="container">
 
 <div class="col-md-5 col-md-offset-3">
@@ -19,7 +19,7 @@
     <?php endif; ?>
     <?php if ( count($admins) > 1 ) : ?>
         <h2>Other Administrators</h2>
-        <table id="admin_list" class="display dt-right" cellspacing="0" width="100%">
+        <table id="admin_list" class="table table-striped table-hover" >
             <thead>
                 <tr>
                     <th>Name</th>
@@ -28,7 +28,7 @@
                     <th>Delete</th>
                 </tr>
             </thead>
-            
+
 
             <tbody>
         <?php foreach($admins as $admin):
@@ -112,10 +112,11 @@ if (isset($_SESSION['form_data'])) {
     unset($_SESSION['form_data']);
 }
 ?>
+
 <script language='javascript'>
-$(document).ready(function() {
-  $('#admin_list').DataTable();
-} );
-</script>
+  $('#admin_list').DataTable( {
+      "autoWidth": true
+  } );
+  </script>
 
 <?php include '../../view/footer.php'; ?>

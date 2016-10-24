@@ -29,9 +29,9 @@ function get_all_admins() {
     $query = 'SELECT * FROM administrators ORDER BY lastName, firstName';
     $statement = $db->prepare($query);
     $statement->execute();
-    $admins = $statement->fetchAll();
+    $result = $statement->fetchAll();
     $statement->closeCursor();
-    return $admins;
+    return $result;
 }
 
 function get_admin ($admin_id) {
