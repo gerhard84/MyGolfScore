@@ -1,7 +1,7 @@
 <?php
-echo	'<pre>';
-var_dump($_POST);
-echo'</pre>';
+//echo	'<pre>';
+//var_dump($_POST);
+//echo'</pre>';
 ?>
 
 <?php
@@ -44,7 +44,7 @@ include ('view/navbar.php');
 
                   <div class="form-group">
                       <label class="control-label col-sm-4" for="date">Date:</label>
-                      <div class="col-sm-8">
+                      <div class="col-md-8">
                           <input required type="text" class="form-control" placeholder='DD/MM/YYYY' id="roundDate" name="roundDate"
                            data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-end-date='0d' data-date-autoclose=true
                            data-date-clear-btn=true data-date-today-highlight=true
@@ -54,7 +54,7 @@ include ('view/navbar.php');
 
                   <div class="row col-md-12 form-group ">
                       <label class="control-label col-sm-4" for="holes">Holes:</label>
-                      <div class=" row col-md-8 ol-md-offset-3">
+                      <div class=" row col-md-8 ">
                         <label class="radio-inline col-md-1">
                           <input type="radio" name="holes" id="front9" value="9">9
                         </label>

@@ -108,7 +108,8 @@ function get_rounds_by_player($player_id) {
                 INNER JOIN courses c
                 ON s.courseID = c.courseID
                 WHERE r.playerID = :player_id
-                GROUP BY r.scorecardID";
+                GROUP BY r.scorecardID
+                ORDER BY playDate";
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':player_id', $player_id);

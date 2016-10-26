@@ -3,7 +3,7 @@
 <div class="container">
 
 <div class="col-md-5 col-md-offset-3">
-    <h1 class="page-header text-center">Administrator Accounts</h1>
+    <h1 class="page-header text-center">Manage Administrators </h1>
     <?php if (isset($_SESSION['admin'])) : ?>
     <h2>My Account</h2>
 
@@ -35,8 +35,8 @@
             if ( $admin['adminID'] != $admin_id ) :
                 ?>
                 <tr>
-                    <td><?php echo $admin['lastName'];?></td>
                     <td><?php echo $admin['firstName'];?></td>
+                    <td><?php echo $admin['lastName'];?></td>
                     <td>
                         <form action="" method="post">
                             <input type="hidden" name="action" value="view_edit" />
@@ -98,7 +98,7 @@
             </div>
         </div>
             <div class="form-group">
-                <div class="col-sm-8">
+                <div class="col-sm-8 col-md-offset-4">
             <input type="submit" value="Add Admin" class="btn btn-success"/>
         </div>
     </div>

@@ -33,7 +33,6 @@ if ( isset($_SESSION['admin']) ) {
 switch ($action) {
     case 'course_list':
         $courses = get_courses();
-
         include('course_list.php');
         break;
 

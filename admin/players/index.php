@@ -66,45 +66,45 @@ switch ($action) {
         break;
     case 'view_edit':
         // Get admin user data
-        $admin_id = intval($_POST['admin_id']);
-        $admin = get_admin($admin_id);
-        $first_name = $admin['firstName'];
-        $last_name = $admin['lastName'];
-        $email = $admin['email'];
+        $player_id = intval($_POST['player_id']);
+        $player = get_player($player_id);
+        $first_name = $player['firstName'];
+        $last_name = $player['lastName'];
+        $email = $player['email'];
+        $town = $player['town'];
 
         // Display Edit page
-        include 'account_edit.php';
+        include 'player_edit.php';
         break;
-    case 'update':
-        $admin_id = intval($_POST['admin_id']);
-        update_admin(
-            $admin_id,
-            $_POST['email'],
-            $_POST['first_name'],
-            $_POST['last_name'],
-            $_POST['password_1'],
-            $_POST['password_2']
-        );
-        if ($admin_id == $_SESSION['admin']['adminID']) {
-            $_SESSION['admin'] = get_admin($admin_id);
-        }
-        redirect($app_path . 'admin/account');
+    case 'update_player':
+        $player_id = intval($_POST['player_id']);
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $email = $_POST['email'];
+        $town = $_POST['town'];
+        $password_1 = $_POST['password_1'];
+        $password_2 = $_POST['password_2'];
+        update_player($player_id, $email, $first_name, $last_name,
+            $password_1, $password_2, $town);
+
+        //if ($admin_id == $_SESSION['admin']['adminID']) {
+        //    $_SESSION['admin'] = get_admin($admin_id);
+        //}
+        redirect($app_path . 'admin/players');
         break;
     case 'view_delete_confirm':
-        $admin_id = intval($_POST['admin_id']);
-        if ($admin_id == $_SESSION['admin']['adminID']) {
-            display_error('You cannot delete your own account.');
-        }
-        $admin = get_admin($admin_id);
-        $first_name = $admin['firstName'];
-        $last_name = $admin['lastName'];
-        $email = $admin['email'];
-        include 'account_delete.php';
+        $player_id = intval($_POST['player_id']);
+
+        $player = get_player($player_id);
+        $first_name = $player['firstName'];
+        $last_name = $player['lastName'];
+        $email = $player['email'];
+        include 'player_delete.php';
         break;
-    case 'delete':
-        $admin_id = intval($_POST['admin_id']);
-        delete_admin($admin_id);
-        redirect($app_path . 'admin/account');
+    case 'delete_player':
+        $player_id = intval($_POST['player_id']);
+        delete_player($player_id);
+        redirect($app_path . 'admin/players');
         break;
     case 'logout':
         unset($_SESSION['admin']);

@@ -1,3 +1,4 @@
+<?php $pageTitle = "Admin-Course";?>
 <?php
  include 'view/header.php';
  include 'view/navbar_admin.php';
@@ -111,14 +112,16 @@
       </div>
 
 
-      <div class="form-group">
-                <div class="col-sm-8">
-            <input type="submit" value="Add Course" class="btn btn-success"/>
-        </div>
-        </form>
-        <form action="" method="post" >
-              <input type="submit" value="Cancel" class="btn btn-danger form-control"/>
+       <div class="btn-group inline col-md-11">
+         <div class="col-md-1 col-md-offset-4 inline">
+            <input type="submit" name="submit" value="Add Course" class="btn btn-success"/>
+            </div>
+            <div class="col-md-1 col-md-offset-3 inline">
+              <input type="button" name="cancel" value="Cancel" class="btn btn-danger" onClick="window.location='index.php'"/>
           </form>
+          </div>
+
+
     </div>
 
 

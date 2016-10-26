@@ -9,8 +9,8 @@ require_once('model/hole_db.php');
 //echo'</pre>';
 ?>
 <div class="container">
-	<div class="col-md-7 col-md-offset-2">
-		<h1 class="page-header text-center">Edit hole <?php echo $hole['holeNo'] ?>  for <?php echo $courseName ?></h1>
+	<div class="col-md-8 col-md-offset-2">
+		<h1 class="page-header text-center">Edit hole <?php echo $hole['holeNo'] ?>  for: </br> <?php echo $courseName ?></h1>
 			<form action="" method="post" class="form-horizontal" >
 				 <input type="hidden" name="action" value="hole_edit" >
 				 <input type="hidden" name="course_id" value="<?php echo $course_id ?>" >
@@ -40,12 +40,16 @@ require_once('model/hole_db.php');
 					</tr>
 				</tbody>
 			</table>
-				<div class="form-group">
-					<input type="submit" name="" value="Update Hole" class="btn btn-primary" />
-				</div>
-				</form>
-				<form action="" method="post" >
-					<input type="submit" value="Cancel" class="btn btn-danger form-control"/>
+
+
+			<div class="btn-group inline col-md-12">
+								<div class="col-md-4 col-md-offset-3 inline">
+										<input type="submit" value="Update" class="btn btn-success form-control"/>
+								</div>
+								<div class="col-md-2  inline">
+										<input type="button" name="cancel" value="Cancel" class="btn btn-danger" onClick="window.location='index.php'"/>
+								</div>
+						</div>
 				</form>
 		</div>
 </div>

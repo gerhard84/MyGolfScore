@@ -128,10 +128,10 @@ switch ($action) {
         $password_1 = $_POST['password_1'];
         $password_2 = $_POST['password_2'];
 
-        // Get the old data for the customer
+        // Get the old data for the player
         $old_player = get_player($player_id);
 
-        // Validate the data for the customer
+        // Validate the data for the player
         if ($email != $old_player['email']) {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 display_error('The e-mail address ' . $email . ' is not valid.');

@@ -118,6 +118,21 @@ function update_player($player_id, $email, $first_name, $last_name,
     }
 }
 
+function delete_player($player_id) {
+    global $db;
+    $query = 'DELETE FROM players WHERE playerID = :player_id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':player_id', $player_id);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
+
+
+
+
+
+
 function player_count() {
     global $db;
     $query = 'SELECT count(*) AS playerCount FROM players';

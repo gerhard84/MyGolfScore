@@ -7,10 +7,9 @@ require_once('model/round_db.php');
 require_once('model/course_db.php');
 require_once('model/hole_db.php');
 
-
 function get_gross_hand() {
     global $db;
-    $query = "SELECT `gross`, `handicap`
+    $query = "SELECT `playerID`,`gross`, `handicap`
                 FROM round";
     try {
         $statement = $db->prepare($query);
@@ -26,8 +25,13 @@ function get_gross_hand() {
 
 $grossArr = get_gross_hand();
 
-foreach ($grossArr as $row) {
-    //$net = 0;
+echo var_dump($grossArr);
+
+
+ foreach ($grossArr as $row) {
+
+    $net = 2;
+    //$net = $net + 1;
     $gross = $row['gross'];
     $handicap = $row['handicap'];
     $net = $gross - $handicap;
@@ -40,11 +44,16 @@ foreach ($grossArr as $row) {
         $statement->bindValue(':net', $net);
         $statement->execute();
 
-        //echo "G" .$gross. "". "N" .$net. "" ."H".$handicap. "</br>";
+        echo "G" .$gross. " ". "N" .$net. " " ."H".$handicap. "</br>";
     } catch (PDOException $e) {
         $error_message = $e->getMessage();
         display_db_error($error_message);
     }
 }
+
+//$statement->execute();
+
+
+
 
  ?>

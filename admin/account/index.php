@@ -14,7 +14,7 @@ if ( admin_count() == 0 ) {
     if ( $_POST['action'] == 'create' ) {
         $action = 'create';
     } else {
-        $action = 'view_account';
+        $action = 'create';
     }
 } elseif ( isset($_SESSION['admin']) ) {
     if ( isset($_POST['action']) ) {

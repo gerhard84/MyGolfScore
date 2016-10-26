@@ -2,13 +2,9 @@
 //Get array with all courses with full details and add holeCount
 function get_courses() {
     global $db;
-    $query = "SELECT *,
-                (SELECT COUNT(*)
-                 FROM holes
-                 WHERE holes.courseID = courses.courseID)
-                 AS holeCount
+    $query = "SELECT courseID, courseName, city, province
               FROM courses
-              ORDER BY courseID";
+              ORDER BY courseName";
     try {
         $statement = $db->prepare($query);
         $statement->execute();
