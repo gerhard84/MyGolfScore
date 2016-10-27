@@ -6,7 +6,8 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
-      <a href="<?php echo $app_path; ?>" class="navbar-left"><img src="/images/logo-new.png"></a>
+      <a href="<?php echo $app_path . 'admin/'; ?>" class="navbar-left"><img src="/images/logo-new.png"></a>
+
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">

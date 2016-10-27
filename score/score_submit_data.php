@@ -1,11 +1,4 @@
 <?php
-echo	'<pre>';
-var_dump($_POST);
-echo'</pre>';
-?>
-
-
-<?php
 require_once('../util/main.php');
 
 include 'view/header.php';
@@ -108,9 +101,9 @@ include ('view/navbar.php');
                               </table>
                               <?php } ?>
                             </div>
-                            <div class="row col-md-10 col-md-offset-5" >
-                              <input type="submit" name="submit_score" value="Submit" class="btn btn-primary col-md-2" />
-                            </div>
+                          </div>
+                          <div class="row col-md-10 col-md-offset-5" >
+                            <input type="submit" name="submit_score" value="Submit" class="btn btn-primary col-md-2" />
                           </div>
                         </br>
                       </div>

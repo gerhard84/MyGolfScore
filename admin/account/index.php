@@ -47,7 +47,7 @@ switch ($action) {
         }
 
         // Display Admin Menu page
-        redirect('..');
+        redirect($app_path . 'admin');
         break;
     case 'create':
         // Get admin user data

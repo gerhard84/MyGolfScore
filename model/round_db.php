@@ -134,7 +134,8 @@ function get_all_rounds() {
                 ON r.scorecardID = s.scorecardID
                 INNER JOIN courses c
                 ON s.courseID = c.courseID
-                GROUP BY r.scorecardID";
+                GROUP BY r.scorecardID
+                ORDER BY playDate";
     $statement = $db->prepare($query);
     $statement->execute();
     $result = $statement->fetchAll();

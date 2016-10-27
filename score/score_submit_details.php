@@ -1,18 +1,8 @@
 <?php
-//echo	'<pre>';
-//var_dump($_POST);
-//echo'</pre>';
-?>
-
-<?php
 require_once('../util/main.php');
 include ('view/header.php');
 include ('view/navbar.php');
-//require_once('model/course_db.php');
-//require_once('model/hole_db.php');
-//require_once('model/player_db.php');
 ?>
-
   <div class="container">
 
   	<div class="col-md-8 col-md-offset-2">

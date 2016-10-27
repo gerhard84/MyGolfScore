@@ -13,7 +13,7 @@ require_once('model/hole_db.php');
 
 <?php
 
-$player_id = 10;
+$player_id = 143;
 
 $pRounds = get_rounds_by_player($player_id);
 $aRounds = get_all_rounds();
@@ -53,7 +53,7 @@ $aRounds = get_all_rounds();
 
         <tbody>
     <?php
-      foreach($aRounds as $round) :
+      foreach($pRounds as $round) :
       $date = $round['playDate'];
       $course_id = $round['courseID'];
       $course = get_course($course_id);

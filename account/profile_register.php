@@ -1,3 +1,4 @@
+<?php require_once('../util/main.php'); ?>
 <?php include '../view/header.php'; ?>
 <?php include '../view/navbar.php'; ?>
 <div class="container">
