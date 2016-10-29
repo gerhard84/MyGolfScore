@@ -5,6 +5,7 @@ require_once('model/hole_db.php');
 require_once('model/round_db.php');
 require_once('model/course_db.php');
 require_once('model/handicap_db.php');
+require_once('model/email.php');
 
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -36,7 +37,6 @@ switch ($action) {
         $handicap = get_handicap($player_id);
         $front9 = get_F9($course_id);
         $back9 = get_B9($course_id);
-
         include 'score_submit_data.php';
         break;
 
@@ -45,15 +45,26 @@ switch ($action) {
     $play_date = $_POST['roundDate'];
     $holes_played = $_POST['holes'];
     $player_id = $_POST['playerID'];
-    $handicap = $_POST['handicap'];
+    $course = get_course($course_id);
+    $cname = $course['courseName'];
+    $handicap = intval($_POST['handicap']);
+    $player = get_player($player_id);
+    $name = $player['firstName']." ".$player['lastName'];
+    $email = $player['email'];
 
+    //echo var_dump($handicap);
+    //break;
+
+    // Calculate Gross
     $gross = array_sum($_POST['score']);
-
+    // Calculate Net
     $net = calc_net($gross, $holes_played, $handicap);
-
+    // Create scorecard
     $scorecard_id = add_scorecard($course_id, $play_date, $holes_played);
-
+    // Create Round
     add_round($scorecard_id, $player_id, $gross, $net, $handicap);
+    // Send scorecard email to player
+    email_scorecard($gross, $net, $handicap, $email, $name, $cname, $play_date);
 
     redirect($app_path . 'account');
 
@@ -61,7 +72,8 @@ switch ($action) {
 
     case 'logout':
         unset($_SESSION['user']);
-        redirect('..');
+        //redirect('..');
+        redirect($app_path);
         break;
 
     default:

@@ -52,6 +52,17 @@ function is_valid_player_login($email, $password) {
     return $player;
 }
 
+function get_email($player_id) {
+global $db;
+$query = 'SELECT email FROM players WHERE playerID = :player_id';
+$statement = $db->prepare($query);
+$statement->bindValue(':player_id', $player_id);
+$statement->execute();
+$email = $statement->fetch();
+$statement->closeCursor();
+return $email;
+}
+
 // Get Player by email
 function get_player_by_email($email) {
     global $db;
@@ -126,12 +137,6 @@ function delete_player($player_id) {
     $statement->execute();
     $statement->closeCursor();
 }
-
-
-
-
-
-
 
 function player_count() {
     global $db;

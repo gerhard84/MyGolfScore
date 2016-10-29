@@ -44,7 +44,6 @@ function get_B9_score($course_id) {
 
 function add_scorecard($course_id, $play_date, $holes_played) {
     global $db;
-
     $query = "INSERT INTO scorecard (courseID, playDate, holesPlayed)
                 VALUES (:course_id, :play_date, :holes_played)";
     try {
@@ -54,7 +53,6 @@ function add_scorecard($course_id, $play_date, $holes_played) {
         $statement->bindValue(':holes_played', $holes_played);
         $statement->execute();
         $statement->closeCursor();
-
         $scorecard_id = $db->lastInsertId('scorecard');
         return $scorecard_id;
     } catch (PDOException $e) {
@@ -69,7 +67,6 @@ function add_round($scorecard_id, $player_id, $gross, $net, $handicap) {
     foreach ( $keys as $key ) {
         $holeNo = ($_POST['holeNo'][$key]);
         $score = ($_POST['score'][$key]);
-
         $query = 'INSERT INTO round (playerID, scorecardID, gross,
                                         net, hole, score, handicap)
                     VALUES (:player_id, :scorecard_id, :gross,
@@ -84,7 +81,6 @@ function add_round($scorecard_id, $player_id, $gross, $net, $handicap) {
                 $statement->bindValue(':handicap', $handicap);
                 $statement->execute();
             }
-
             try {
                 $statement->closeCursor();
                 //Get the last hole ID that was automatically generated

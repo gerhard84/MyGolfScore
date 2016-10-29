@@ -6,6 +6,7 @@ require_once('model/handicap_db.php');
 require_once('model/round_db.php');
 require_once('model/course_db.php');
 require_once('model/hole_db.php');
+require_once('model/email.php');
 
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -66,6 +67,8 @@ switch ($action) {
                                         $last_name, $password_1, $password_2, $town);
             //Create default handicap
             add_handicap($player_id);
+            //Send registration  email
+            email_register($email, $first_name, $last_name);
             // Set up session data
             unset($_SESSION['form_data']);
             $_SESSION['user'] = get_player($player_id);
