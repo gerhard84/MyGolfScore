@@ -5,12 +5,12 @@
 <div class="col-md-5 col-md-offset-3">
     <h1 class="page-header text-center">Manage Administrators </h1>
     <?php if (isset($_SESSION['admin'])) : ?>
-    <h2>My Account</h2>
+    <h3>My Account</h3>
 
 
     <form action="" method="post" class="form-inline">
         <div class="form-group">
-            <label for="email"><?php echo $name . ' (' . $email . ')'; ?></label>
+            <label for="email"><?php echo $name . ' (' . $email . ')' . "&nbsp". "&nbsp". "&nbsp" . "&nbsp". "&nbsp". "&nbsp" . "&nbsp". "&nbsp". "&nbsp"; ?></label>
             <input type="hidden" name="action" value="view_edit" />
             <input type="hidden" name="admin_id" value="<?php echo $admin_id; ?>" />
             <button type="submit" class="btn btn-warning btn-sm">Edit</button>
@@ -18,7 +18,7 @@
     </form>
     <?php endif; ?>
     <?php if ( count($admins) > 1 ) : ?>
-        <h2>Other Administrators</h2>
+        <h3>Other Administrators</h3>
         <table id="admin_list" class="table table-striped table-hover" >
             <thead>
                 <tr>
@@ -58,7 +58,7 @@
         </table>
     <?php endif; ?>
 
-    <h2>Add Administrator</h2>
+    <h3>Add Administrator</h3>
     <form action="" method="post" id="add_admin_user_form" class="form-horizontal">
         <input type="hidden" name="action" value="create" />
 

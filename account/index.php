@@ -92,7 +92,9 @@ switch ($action) {
         $player_id = ($_SESSION['user']['playerID']);
         $logins = login_count($player_id);
         $rounds = get_rounds_by_player($player_id);
-        $roundCount = round_count_player($player_id);
+        //$roundCount = round_count_player($player_id);
+        $lHandicap = get_handicap($player_id);
+        $gRounds = graph_rounds_by_player($player_id);
         include 'profile_view.php';
         break;
     case 'view_profile_edit':
@@ -142,6 +144,29 @@ switch ($action) {
         $_SESSION['user'] = get_player($player_id);
         redirect('.');
         break;
+    case 'view_scorecard':
+        $scorecard_id = $_POST['scorecardID'];
+        $course_id = $_POST['courseID'];
+        $player_id = $_POST['playerID'];
+        $play_date = $_POST['roundDate'];
+        $holes = $_POST['holes'];
+        $date = $_POST['roundDate'];
+        $handicap = $_POST['handicap'];
+        $course = $_POST['course'];
+        $playerRaw = get_player($player_id);
+        $player_name =  $playerRaw['firstName']. " ". $playerRaw['lastName'];
+        $front9 = get_F9($course_id);
+        $back9 = get_B9($course_id);
+        $roundInfo = get_round_score($scorecard_id);
+        $net = $roundInfo[0]['net'];
+        $gross = $roundInfo[0]['gross'];
+        $f9Scores = array_slice($roundInfo, 0, 9);
+        $b9Scores = array_slice($roundInfo, 9, 18);
+
+
+        include 'round_view.php';
+        break;
+
     case 'logout':
         unset($_SESSION['user']);
         redirect('..');

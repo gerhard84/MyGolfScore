@@ -14,32 +14,27 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
     <ul class="nav navbar-nav">
-      <li><a href="<?php echo $app_path; ?>">Home</a></li>
+      <li><a href="<?php echo $app_path; ?>"> <span class="glyphicon glyphicon-home"></span> Home</a></li>
 					<?php if (isset($_SESSION['user'])) : ?>
-            <li><a href="<?php echo $app_path; ?>score">Submit Score</a></li>
+            <li><a href="<?php echo $app_path; ?>score"> <span class="glyphicon glyphicon-screenshot"></span> Submit Score</a></li>
 						<?php else: ?>
-							<li><a href="<?php echo $account_url; ?>">Submit Score</a></li>
+							<li><a href="<?php echo $account_url; ?>"> <span class="glyphicon glyphicon-remove-sign"></span> Submit Score</a></li>
 							<?php endif; ?>
-            <li><a href="players.php">Players</a></li>
+              <li><a href="<?php echo $app_path; ?>rounds"><span class="glyphicon glyphicon-globe"></span> Scorecards</a></li>
+            <!--
             <li><a href="courses.php">Courses</a></li>
             <li><a href="model/contact.php">Contact</a></li>
-            <li>
-            <!-- These links are for testing only.
-                 Remove them from a production application. -->
-            <a href="<?php echo $app_path; ?>admin">Admin</a>
-          </li>
-
+          -->
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <?php
                 if (isset($_SESSION['user'])) :
                 ?>
   				<li><p class="navbar-text">Signed in as <?php echo $_SESSION['user']['firstName']; ?></p></li>
-          <li><a href="<?php echo $account_url; ?>"><span class="glyphicon glyphicon-user"></span>My Profile</a></li>
-          <li><a href="<?php echo $logout_url; ?>"><span class="glyphicon glyphicon-log-out"></span>Log Out</a></li>
+          <li><a href="<?php echo $account_url; ?>"> <span class="glyphicon glyphicon-user"></span> My Profile</a></li>
+          <li><a href="<?php echo $logout_url; ?>"> <span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
         <?php else: ?>
-          <li><a href="<?php echo $account_url; ?>"><span class="glyphicon glyphicon-user"></span>Register</a></li>
-          <li><a href="<?php echo $account_url; ?>"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+          <li><a href="<?php echo $account_url; ?>"> <span class="glyphicon glyphicon-log-in"></span> Sign In / Register</a></li>
   				<?php endif; ?>
         </ul>
     </div><!--/.navbar-collapse -->

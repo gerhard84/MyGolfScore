@@ -39,7 +39,7 @@
 
                     <div class="form-group">
                         <label for="password_1">Password:</label>
-                        <input type="password" name="password_1" placeholder="Password"
+                        <input type="password" name="password_1" placeholder="Minimum 6 characters"
                         class="form-control"
                         />
 
@@ -52,9 +52,14 @@
                         />
                     </div>
 
-                    <div class="form-group">
-                        <input type="submit" value="Register" class="btn btn-primary" />
-                    </div>
+                    <div class="btn-group inline col-md-12">
+            <div class="col-md-4 col-md-offset-2 inline">
+                <input type="submit" value="Register" class="btn btn-success form-control" />
+            </div>
+            <div class="col-md-2  inline">
+                <input type="button" name="cancel" value="Cancel" class="btn btn-danger" onClick="window.location='index.php'"/>
+            </div>
+        </div>
                 </fieldset>
             </form>
         </div>

@@ -52,6 +52,7 @@ $rounds = get_all_rounds();
             curveType: 'function',
             pointSize: 5,
             pointShape: { type: 'triangle', rotation: 180 },
+
             legend: { position: 'bottom' }
           };
 
@@ -62,6 +63,6 @@ $rounds = get_all_rounds();
       </script>
     </head>
     <body>
-      <div id="pRounds_chart" style="width: 1200px; height: 500px"></div>
+      <div id="pRounds_chart" style="width: 900; height: 500px"></div>
     </body>
    </html>

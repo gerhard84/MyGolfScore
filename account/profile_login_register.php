@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="password">Password:</label>
                     <div class="col-sm-8">
-                        <input type="password" name="password" class="form-control"/>
+                        <input type="password" name="password" placeholder="Password" required class="form-control"/>
                     </div>
                 </div>
 

@@ -1,10 +1,5 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 require_once('../util/main.php');
-//require_once('util/secure_conn.php');
-
 require_once('model/player_db.php');
 require_once('model/hole_db.php');
 require_once('model/round_db.php');
@@ -52,12 +47,6 @@ switch ($action) {
     $player_id = $_POST['playerID'];
     $handicap = $_POST['handicap'];
 
-    // echo	'<pre>';
-    // var_dump($_POST);
-    // echo'</pre>';
-    //
-    // break;
-
     $gross = array_sum($_POST['score']);
 
     $net = calc_net($gross, $holes_played, $handicap);
@@ -66,7 +55,7 @@ switch ($action) {
 
     add_round($scorecard_id, $player_id, $gross, $net, $handicap);
 
-    redirect($app_path . 'score');
+    redirect($app_path . 'account');
 
         break;
 

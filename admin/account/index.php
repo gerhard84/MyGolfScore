@@ -153,7 +153,7 @@ switch ($action) {
         break;
     case 'logout':
         unset($_SESSION['admin']);
-        redirect($app_path . 'admin/account');
+        redirect($app_path . 'index.php');
         break;
     default:
         display_error('Unknown account action: ' . $action);

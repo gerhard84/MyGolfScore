@@ -2,7 +2,7 @@
 <?php include '../../view/header.php'; ?>
 <div class="container">
 
-  <div class="col-md-10 col-md-offset-1">
+  <div class="col-md-12">
     <h1 class="page-header text-center">Manage Players</h1>
     <?php if (isset($_SESSION['admin'])) : ?>
 
@@ -17,6 +17,7 @@
             <th>Logins</th>
             <th>Edit</th>
             <th>Delete</th>
+            <th>Access</th>
           </tr>
         </thead>
         <tfoot>
@@ -29,6 +30,7 @@
             <th>Logins</th>
             <th>Edit</th>
             <th>Delete</th>
+            <th>Access</th>
           </tr>
         </tfoot>
 
@@ -54,7 +56,7 @@
                 <form action="" method="post">
                   <input type="hidden" name="action" value="view_edit" />
                   <input type="hidden" name="player_id" value="<?php echo $player['playerID'];?>"/>
-                  <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                  <button type="submit" class="btn btn-success btn-sm">Edit</button>
                 </form>
               </td>
               <td>
@@ -62,6 +64,13 @@
                   <input type="hidden" name="action" value="view_delete_confirm" />
                   <input type="hidden" name="player_id" value="<?php echo $player['playerID']; ?>" />
                   <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </td>
+              <td>
+                <form action="" method="post" >
+                  <input type="hidden" name="action" value="ban_player" />
+                  <input type="hidden" name="player_id" value="<?php echo $player['playerID']; ?>" />
+                  <button type="submit" class="btn btn-warning btn-sm">Access</button>
                 </form>
               </td>
             </tr>

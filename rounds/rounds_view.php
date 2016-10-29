@@ -11,25 +11,16 @@ require_once('model/hole_db.php');
  <?php include 'view/navbar.php'; ?>
 
 
-<?php
 
-$aRounds = get_all_rounds();
+<div class="container">
 
-//echo json_encode($aRounds);
+   <div class="col-md-10 col-md-offset-1">
 
+      <h1 class="page-header text-center">Scorecards</h1>
 
-?>
-</br>
-</br>
-</br>
-
-
-
-    <h2>All played rounds</h2>
             <table id="aRounds" class="table table-striped table-hover" >
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Date</th>
                     <th>Player</th>
                     <th>Course </th>
@@ -42,7 +33,6 @@ $aRounds = get_all_rounds();
             </thead>
             <tfoot>
                 <tr>
-                    <th>ID</th>
                     <th>Date</th>
                     <th>Player</th>
                     <th>Course </th>
@@ -57,9 +47,8 @@ $aRounds = get_all_rounds();
             <tbody>
         <?php
           foreach($aRounds as $round) :
-          $round_id = $round['roundID'];
-          $player_id = $round['playerID'];
           $date = $round['playDate'];
+          $player_id = $round['playerID'];
           $player = $round['firstName']." ".$round['lastName'];
           $course_id = $round['courseID'];
           $course = get_course($course_id);
@@ -70,7 +59,6 @@ $aRounds = get_all_rounds();
           $scorecard_id = $round['scorecardID'];
         ?>
                 <tr>
-                    <td><?php echo $round_id;?></td>
                     <td><?php echo $date;?></td>
                     <td><?php echo $player;?></td>
                     <td><?php echo $course[1];?></td>
@@ -79,33 +67,34 @@ $aRounds = get_all_rounds();
                     <td><?php echo $net;?></td>
                     <td><?php echo $handicap;?></td>
                     <td>
-                        <form action="" method="post">
-                            <input type="hidden" name="action" value="view_scorecard" />
-                            <input type="hidden" name="round_id" value="<?php echo $scorecard_id;?>"/>
-                            <button type="submit" class="btn btn-warning btn-sm">View</button>
-                        </form>
+                      <form action="" method="post">
+                         <input type="hidden" name="action" value="view_scorecard" />
+                         <input type="hidden" name="scorecardID" value="<?php echo $scorecard_id; ?>"/>
+                         <input type="hidden" name="courseID" value="<?php echo $course_id ?>"/>
+                         <input type="hidden" name="playerID" value="<?php echo $player_id ?>"/>
+                         <input type="hidden" name="roundDate" value="<?php echo $date ?>"/>
+                         <input type="hidden" name="holes" value="<?php echo $holes ?>"/>
+                         <input type="hidden" name="handicap" value="<?php echo $handicap ?>"/>
+                         <input type="hidden" name="course" value="<?php echo $course[1] ?>"/>
+                         <button type="submit" class="btn btn-success btn-sm">View</button>
+                      </form>
                     </td>
                 </tr>
         <?php endforeach; ?>
         </table>
+    </div>
+    </div>
 
 
-        <script language='javascript'>
-          $('#pRounds').DataTable( {
-              "autoWidth": true
-          } );
-        </script>
+
         <script language='javascript'>
         $('#aRounds').DataTable( {
-            "autoWidth": true
+            "autoWidth": true,
+            "order": [[ 0, "desc" ]]
         } );
         </script>
 
 
-        <?php
-        echo	'<pre>';
-        var_dump($aRounds);
-        echo'</pre>';
-        ?>
+
 
  <?php include 'view/footer.php'; ?>

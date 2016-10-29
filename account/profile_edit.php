@@ -1,3 +1,4 @@
+<?php $pageTitle = "Profile Edit";?>
 <?php include '../view/header.php'; ?>
 <?php include '../view/navbar.php'; ?>
 <div class="container">
@@ -27,7 +28,7 @@
                         <input type="text" name="email" required value="<?php echo $email; ?>" class="form-control"/>
                     </div>
 
-                    <h1 class="page-header text-center">Change password</h1>
+                    <h3>Change Password</h3>
 
                     <div class="form-group">
                         <label for="password_1">New Password:</label>
@@ -39,16 +40,20 @@
                         <input type="password" name="password_2" class="form-control"/>
                     </div>
 
-                    <div class="form-group">
-                        <input type="submit" value="Update Profile" class="btn btn-primary" />
+                    <div class="btn-group inline col-md-12">
+                        <div class="col-md-4 col-md-offset-2 inline">
+                            <input type="submit" value="Update" class="btn btn-success form-control" />
+                        </div>
+                        <div class="col-md-2  inline">
+                            <input type="button" name="cancel" value="Cancel" class="btn btn-danger" onClick="window.location='index.php'"/>
+                        </div>
                     </div>
-                </fieldset>
-            </form>
 
-                <div class="form-group">
-                    <form action="" method="post" class="aligned">
-                        <input type="submit" value="Cancel" class="btn btn-primary" />
-                    </form>
+
+
+
+
+
                 </div>
             </div>
         </div>

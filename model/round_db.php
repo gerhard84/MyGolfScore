@@ -123,6 +123,34 @@ function get_rounds_by_player($player_id) {
     }
 }
 
+function graph_rounds_by_player($player_id) {
+    global $db;
+    $query = "SELECT r.playerID, s.scorecardID, c.courseID, roundID, gross, net,
+                    handicap, firstName, lastName, holesPlayed, courseName, playDate
+                FROM round r
+                INNER JOIN players p
+                ON r.playerID = p.playerID
+                INNER JOIN scorecard s
+                ON r.scorecardID = s.scorecardID
+                INNER JOIN courses c
+                ON s.courseID = c.courseID
+                WHERE r.playerID = :player_id
+                GROUP BY r.scorecardID
+                ORDER BY playDate
+                LIMIT 15";
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':player_id', $player_id);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+    }
+}
+
 function get_all_rounds() {
     global $db;
     $query = "SELECT p.playerID, s.scorecardID, c.courseID, roundID, gross, net,
@@ -178,20 +206,23 @@ function get_all_rounds() {
             return $result;
         }
 
-        function round_count_player($player_id) {
-            global $db;
-            $query = "SELECT count(*)
-                        AS roundCount
-                        FROM round
-                        WHERE playerID = :playerID";
-            $statement = $db->prepare($query);
-            $statement->bindValue(':playerID', $player_id);
-            $statement->execute();
-            $result = $statement->fetch();
-            $statement->closeCursor();
-            return $result['roundCount'];
-        }
-
+        function get_round_score($scorecard_id){
+          global $db;
+          $query = "SELECT  gross, net, score
+                    FROM round
+                    WHERE scorecardID = :scorecard_id";
+              try {
+                    $statement = $db->prepare($query);
+                    $statement->bindValue(':scorecard_id', $scorecard_id);
+                    $statement->execute();
+                    $result = $statement->fetchAll();
+                    $statement->closeCursor();
+                    return $result;
+                } catch (PDOException $e) {
+                    $error_message = $e->getMessage();
+                    display_db_error($error_message);
+                }
+              }
 
 
 ?>
