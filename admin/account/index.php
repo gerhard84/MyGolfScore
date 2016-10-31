@@ -2,9 +2,7 @@
 require_once('../../util/main.php');
 //require_once('util/secure_conn.php');
 require_once('model/admin_db.php');
-
-    include ('view/navbar_admin.php');
-
+//include ('view/navbar_admin.php');
 if (isset($_SESSION['user'])) {
     display_error('You cannot login to the admin section while ' .
                   'logged in as a customer.');
@@ -14,7 +12,7 @@ if ( admin_count() == 0 ) {
     if ( $_POST['action'] == 'create' ) {
         $action = 'create';
     } else {
-        $action = 'create';
+        $action = 'view_account';
     }
 } elseif ( isset($_SESSION['admin']) ) {
     if ( isset($_POST['action']) ) {
@@ -47,7 +45,7 @@ switch ($action) {
         }
 
         // Display Admin Menu page
-        redirect($app_path . 'admin');
+        redirect('..');
         break;
     case 'create':
         // Get admin user data
@@ -93,8 +91,8 @@ switch ($action) {
         if (!isset($_SESSION['admin'])) {
             $_SESSION['admin'] = get_admin($admin_id);
         }
-
-        redirect('.');
+        redirect($app_path . 'admin');
+        //redirect('.');
         break;
     case 'view_account':
         // Get admin user data from session
@@ -149,11 +147,13 @@ switch ($action) {
     case 'delete':
         $admin_id = intval($_POST['admin_id']);
         delete_admin($admin_id);
+        //redirect($app_path . 'admin');
         redirect($app_path . 'admin/account');
         break;
     case 'logout':
         unset($_SESSION['admin']);
-        redirect($app_path . 'index.php');
+        redirect($app_path);
+        //redirect($app_path . 'index.php');
         break;
     default:
         display_error('Unknown account action: ' . $action);

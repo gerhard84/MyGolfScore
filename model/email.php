@@ -58,4 +58,36 @@ function email_scorecard($gross, $net, $handicap, $email, $name, $cname, $play_d
     echo "Mailer Error: " . $mail->ErrorInfo;
   }
 }
+
+function email_contact($email, $name, $subject, $msg) {
+  $message = file_get_contents('../util/PHPMailer/mail_templates/contact_submit.html');
+  $message = str_replace('%username%', $name, $message);
+  $message = str_replace('%subject%', $subject, $message);
+  $message = str_replace('%msg%', $msg, $message);
+
+  $mail = new PHPMailer;
+  $mail->Host = 'smtp.@mygolfscore.co.za';
+  $mail->SMTPAuth = true;
+  $mail->Username = 'webmaster@mygolfscore.co.za';
+  $mail->Password = 'G0lf$c0r3!@#123';
+  $mail->SMTPSecure = 'tls';
+  $mail->Port = 587;
+  $mail->setFrom('support@mygolfscore.co.za', 'My Golf Score - Support');
+  $mail->addAddress('support@mygolfscore.co.za', 'My Golf Score - Support');
+  $mail->addAddress($email, $name);
+  $mail->addReplyTo('support@mygolfscore.co.za', 'My Golf Score - Support');
+  $mail->isHTML(true);
+  $mail->Subject = 'My Golf Score - Support';
+  $mail->Body    = $message;
+  $mail->MsgHTML($message);
+  $mail->IsHTML(true);
+  $mail->CharSet="utf-8";
+  //$mail->AltBody(strip_tags($message));
+  if(!$mail->Send()) {
+    echo "Mailer Error: " . $mail->ErrorInfo;
+  }
+}
+
+
+
 ?>

@@ -8,24 +8,20 @@ require_once('model/course_db.php');
 require_once('model/hole_db.php');
 require_once('model/email.php');
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+$email = 'gerhard.g84@gmail.com';
+$name = 'Gerhard';
+$subject = 'Test';
+$msg = 'Message';
 
 
+email_contact($email, $name, $subject, $msg);
 
-$gross = 85;
-$net = 75;
-$handicap = 10;
-
-$course_id = 14;
-$player_id = 101;
-$course = get_course($course_id);
-$cname = $course['courseName'];
-$player = get_player($player_id);
-$name = $player['firstName']." ".$player['lastName'];
-$email = $player['email'];
-
-echo $cname;
-echo $name;
-echo $email;
+//echo $cname;
+//echo $name;
+//echo $email;
 
 //email_scorecard($gross, $net, $handicap, $email, $name, $cname, $play_date);
 

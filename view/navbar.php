@@ -21,6 +21,7 @@
 							<li><a href="<?php echo $account_url; ?>"> <span class="glyphicon glyphicon-remove-sign"></span> Submit Score</a></li>
 							<?php endif; ?>
               <li><a href="<?php echo $app_path; ?>rounds"><span class="glyphicon glyphicon-globe"></span> Scorecards</a></li>
+              <li><a href="<?php echo $app_path; ?>contact"><span class="glyphicon glyphicon-envelope"></span> Contact Us</a></li>
             <!--
             <li><a href="courses.php">Courses</a></li>
             <li><a href="model/contact.php">Contact</a></li>
