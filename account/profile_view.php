@@ -1,8 +1,8 @@
 <?php $pageTitle = "Profile";?>
 <?php include '../view/header.php'; ?>
 <?php include '../view/navbar.php'; ?>
-<?php
 
+<?php
 foreach($gRounds as $gRound) :
    $gDate[] = $gRound['playDate'];
    $gGross[] = ((int)$gRound['gross']);
@@ -16,25 +16,19 @@ endforeach;
    <script type="text/javascript">
    google.charts.load('current', {'packages':['corechart']});
    google.charts.setOnLoadCallback(drawChart);
-
    function drawChart() {
       var data = google.visualization.arrayToDataTable([
-         ['Date', 'Gross', 'Handicap'],
+         ['Date',                         'Gross',                      'Handicap'],
          <?php for ($i=0; $i < count($gDate); $i++) { ?>
-            ['<?php echo $gDate[$i]; ?>',  <?php echo $gGross[$i]; ?>,       <?php echo $gHandicap[$i]; ?>],
+            ['<?php echo $gDate[$i] ?>',  <?php echo $gGross[$i] ?>, <?php echo $gHandicap[$i] ?>],
             <?php } ?>
-
          ]);
-
          var options = {
-            //title: 'Your Last 10 Rounds',
             curveType: 'function',
             pointSize: 10,
             pointShape: { type: 'triangle', rotation: 90 },
-
             legend: { position: 'bottom' }
          };
-
          var chart = new google.visualization.LineChart(document.getElementById('pRounds_chart'));
 
          chart.draw(data, options);

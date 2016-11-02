@@ -101,7 +101,7 @@ require_once('model/course_db.php');
                   <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
               </td>
-            </tr>            
+            </tr>
           <?php endforeach; ?>
         </tbody>
       </table>

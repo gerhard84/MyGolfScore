@@ -1,6 +1,7 @@
 <?php
 require_once('../util/main.php');
 require_once('model/email.php');
+require_once('model/support_db.php');
 
 if (isset($_POST['action'])) {
   $action = $_POST['action'];
@@ -40,9 +41,10 @@ switch ($action) {
     {
         display_error("Please enter a message");
     }
-    var_dump($_POST);
-break;
-    email_contact($email, $name, $subject, $msg);
+
+    //email_contact($email, $name, $subject, $msg);
+
+    add_support($email, $name, $subject, $msg);
 
     redirect('..');
   break;

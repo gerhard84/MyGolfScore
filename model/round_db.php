@@ -166,59 +166,56 @@ function get_all_rounds() {
     $statement->closeCursor();
     return $result;
 }
+function delete_round($round_id) {
+    global $db;
+    $query = 'DELETE FROM round
+                WHERE roundID = :round_id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':round_id', $round_id);
+    $statement->execute();
+    $statement->closeCursor();
+}
 
+function rounds_count() {
+    global $db;
+    $query = 'SELECT count(*)
+                AS roundsCount
+                FROM round';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $result = $statement->fetch();
+    $statement->closeCursor();
+    return $result['roundsCount'];
+}
 
+function calc_net($gross, $holes_played, $handicap) {
+    if ($holes_played <= 9) {
+        $result =  $gross - ($handicap / 2);
+    }
+    else
+    {
+        $result = $gross - $handicap;
+    }
+    return $result;
+}
 
-        function delete_round($round_id) {
-            global $db;
-            $query = 'DELETE FROM round
-                        WHERE roundID = :round_id';
+function get_round_score($scorecard_id){
+  global $db;
+  $query = "SELECT  gross, net, score
+            FROM round
+            WHERE scorecardID = :scorecard_id";
+      try {
             $statement = $db->prepare($query);
-            $statement->bindValue(':round_id', $round_id);
+            $statement->bindValue(':scorecard_id', $scorecard_id);
             $statement->execute();
+            $result = $statement->fetchAll();
             $statement->closeCursor();
-        }
-
-        function rounds_count() {
-            global $db;
-            $query = 'SELECT count(*)
-                        AS roundsCount
-                        FROM round';
-            $statement = $db->prepare($query);
-            $statement->execute();
-            $result = $statement->fetch();
-            $statement->closeCursor();
-            return $result['roundsCount'];
-        }
-
-        function calc_net($gross, $holes_played, $handicap) {
-            if ($holes_played <= 9) {
-                $result =  $gross - ($handicap / 2);
-            }
-            else
-            {
-                $result = $gross - $handicap;
-            }
             return $result;
+        } catch (PDOException $e) {
+            $error_message = $e->getMessage();
+            display_db_error($error_message);
         }
-
-        function get_round_score($scorecard_id){
-          global $db;
-          $query = "SELECT  gross, net, score
-                    FROM round
-                    WHERE scorecardID = :scorecard_id";
-              try {
-                    $statement = $db->prepare($query);
-                    $statement->bindValue(':scorecard_id', $scorecard_id);
-                    $statement->execute();
-                    $result = $statement->fetchAll();
-                    $statement->closeCursor();
-                    return $result;
-                } catch (PDOException $e) {
-                    $error_message = $e->getMessage();
-                    display_db_error($error_message);
-                }
-              }
+      }
 
 
 ?>

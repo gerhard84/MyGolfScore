@@ -10,8 +10,6 @@ require_once('model/hole_db.php');
  <?php include 'view/header.php'; ?>
  <?php include 'view/navbar.php'; ?>
 
-
-
 <div class="container">
 
    <div class="col-md-10 col-md-offset-1">
@@ -85,8 +83,6 @@ require_once('model/hole_db.php');
     </div>
     </div>
 
-
-
         <script language='javascript'>
         $('#aRounds').DataTable( {
             "autoWidth": true,
@@ -94,7 +90,6 @@ require_once('model/hole_db.php');
         } );
         </script>
 
-
-
+      </br>
 
  <?php include 'view/footer.php'; ?>

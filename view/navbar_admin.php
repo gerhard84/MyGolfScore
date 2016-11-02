@@ -16,6 +16,7 @@
                 <li><a href="<?php echo $app_path; ?>admin/course">Course Manager</a></li>
                 <li><a href="<?php echo $app_path; ?>admin/players">Player Manager</a></li>
                 <li><a href="<?php echo $app_path; ?>admin/account">Admin Manager</a></li>
+                <li><a href="<?php echo $app_path; ?>admin/support">Support Manager</a></li>
           <?php else: ?>
                   <li><a href="<?php echo $app_path; ?>">Home</a></li>
         <?php endif; ?>

@@ -87,6 +87,7 @@ switch ($action) {
                 }
             redirect('.');
         break;
+
     case 'view_profile':
         $player_name = $_SESSION['user']['firstName'] . ' ' .
                             $_SESSION['user']['lastName'];
@@ -100,6 +101,7 @@ switch ($action) {
         $gRounds = graph_rounds_by_player($player_id);
         include 'profile_view.php';
         break;
+
     case 'view_profile_edit':
         $first_name = $_SESSION['user']['firstName'];
         $last_name = $_SESSION['user']['lastName'];

@@ -1,5 +1,6 @@
 <?php $pageTitle = "Admin - Account";?>
 <?php include 'view/header.php'; ?>
+<?php include ('view/navbar_admin.php'); ?>
 <div class="container">
 
 <div class="col-md-5 col-md-offset-3">

@@ -10,6 +10,8 @@ include ('view/navbar.php');
 
     <form action="" method="post" class="form-horizontal">
       <input type="hidden" name="action" value="view_submit_data" />
+    </br>
+    </br>
       <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-primary">
           <div class="panel-heading">Round Details</div>
