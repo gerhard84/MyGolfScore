@@ -65,7 +65,7 @@ switch ($action) {
             // Add the player data to the database
             $player_id = add_player($email, $first_name,
                                         $last_name, $password_1, $password_2, $town);
-            //Create default handicap
+            //Create default handicap            
             add_handicap($player_id);
             //Send registration  email
             email_register($email, $first_name, $last_name);
