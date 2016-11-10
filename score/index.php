@@ -62,7 +62,6 @@ switch ($action) {
         add_round($scorecard_id, $player_id, $gross, $net, $handicap);
         // Send scorecard email to player
         email_scorecard($gross, $net, $handicap, $email, $name, $cname, $play_date);
-
         //Calculate New handicap
         $rounds = get_last_20_rounds_by_player($player_id);
         //Continue if more than 5 rounds has been played

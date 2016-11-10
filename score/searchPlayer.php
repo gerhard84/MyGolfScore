@@ -1,6 +1,5 @@
 <?php
 require_once('../util/main.php');
-//include 'view/header.php';
 
 // get the search term
 $search_term = isset($_REQUEST['term']) ? $_REQUEST['term'] : "";

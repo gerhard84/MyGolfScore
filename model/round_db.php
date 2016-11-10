@@ -215,7 +215,5 @@ function get_round_score($scorecard_id){
             $error_message = $e->getMessage();
             display_db_error($error_message);
         }
-      }
-
-
+    }
 ?>

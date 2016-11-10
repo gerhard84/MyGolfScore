@@ -4,7 +4,6 @@ include 'view/header.php';
 include ('view/navbar_admin.php');
 ?>
 <div class="container">
-
     <div class="col-md-5 col-md-offset-3">
         <h1 class="page-header text-center">Edit Course</h1>
 
@@ -57,56 +56,56 @@ include ('view/navbar_admin.php');
             <div class="form-group">
                 <label class="control-label col-sm-4" for="rating">Rating:</label>
                 <div class="col-sm-8">
-                    <input type="text" name="rating" value="<?php echo $rating; ?>" required class="form-control"/>
+                    <input type="number" name="rating" value="<?php echo $rating; ?>" required class="form-control"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-4" for="slope">Slope:</label>
                 <div class="col-sm-8">
-                    <input type="text" name="slope" value="<?php echo $slope; ?>" required class="form-control"/>
+                    <input type="number" name="slope" value="<?php echo $slope; ?>" required class="form-control"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-4" for="parOut">Par Out:</label>
                 <div class="col-sm-8">
-                    <input type="text" name="parOut" value="<?php echo $parOut; ?>" required class="form-control"/>
+                    <input type="number" name="parOut" value="<?php echo $parOut; ?>" required class="form-control"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-4" for="parIn">Par In:</label>
                 <div class="col-sm-8">
-                    <input type="text" name="parIn" value="<?php echo $parIn; ?>" required class="form-control"/>
+                    <input type="number" name="parIn" value="<?php echo $parIn; ?>" required class="form-control"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-4" for="parTotal">Par Total:</label>
                 <div class="col-sm-8">
-                    <input type="text" name="parTotal" value="<?php echo $parTotal; ?>" required class="form-control"/>
+                    <input type="number" name="parTotal" value="<?php echo $parTotal; ?>" required class="form-control"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-4" for="mOut">Meters Out:</label>
                 <div class="col-sm-8">
-                    <input type="text" name="mOut" value="<?php echo $mOut; ?>" required class="form-control"/>
+                    <input type="number" name="mOut" value="<?php echo $mOut; ?>" required class="form-control"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-4" for="mIn">Meters In:</label>
                 <div class="col-sm-8">
-                    <input type="text" name="mIn" value="<?php echo $mIn; ?>" required class="form-control"/>
+                    <input type="number" name="mIn" value="<?php echo $mIn; ?>" required class="form-control"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-4" for="mTotal">Meters Total:</label>
                 <div class="col-sm-8">
-                    <input type="text" name="mTotal" value="<?php echo $mTotal; ?>" required class="form-control"/>
+                    <input type="number" name="mTotal" value="<?php echo $mTotal; ?>" required class="form-control"/>
                 </div>
             </div>
 

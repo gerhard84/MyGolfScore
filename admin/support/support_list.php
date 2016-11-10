@@ -1,16 +1,9 @@
-<?php $pageTitle = "Admin-Course";?>
+<?php $pageTitle = "Admin-Support";?>
 <?php
-//require_once('../../util/main.php');
 include ('view/header.php');
 include ('view/navbar_admin.php');
-
-
-//echo	'<pre>';
-//var_dump($_POST);
-//echo'</pre>';
 ?>
 <div class="container">
-
   <div class="col-md-8 col-md-offset-2">
     <h1 class="page-header text-center">Support Manager</h1>
   </div>
@@ -36,10 +29,8 @@ include ('view/navbar_admin.php');
             <th>Status</th>
           </tr>
         </tfoot>
-
         <tbody>
-        <?php foreach($tickets as $ticket) : ?>
-
+          <?php foreach($tickets as $ticket) : ?>
             <tr>
               <td><?php echo $ticket['date'];?></td>
               <td><?php echo $ticket['email'];?></td>
@@ -50,7 +41,6 @@ include ('view/navbar_admin.php');
                 <form action="" method="post">
                   <input type="hidden" name="action" value="support_view_edit">
                   <input type="hidden" name="ticket_id" value="<?php echo $ticket['supportID'];?>">
-
                   <button type="submit" class="btn btn-success btn-sm">View</button>
                 </form>
               </td>
@@ -59,7 +49,7 @@ include ('view/navbar_admin.php');
         </tbody>
       </table>
     <?php else : ?>
-       <p>Looks like everyone is happy!!!</p>
+      <p>Looks like everyone is happy!!!</p>
     <?php endif; ?>
   </div>
 </div>

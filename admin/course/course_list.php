@@ -1,16 +1,10 @@
 <?php $pageTitle = "Admin-Course";?>
 <?php
-//require_once('../../util/main.php');
 include ('view/header.php');
 include ('view/navbar_admin.php');
 require_once('model/course_db.php');
-
-//echo	'<pre>';
-//var_dump($_POST);
-//echo'</pre>';
 ?>
 <div class="container">
-
   <div class="col-md-8 col-md-offset-2">
     <h1 class="page-header text-center">Course Manager</h1>
   </div>
@@ -24,7 +18,6 @@ require_once('model/course_db.php');
       </form>
     </div>
   </div>
-
 
   <div class="col-md-8 col-md-offset-2">
     <?php if ( count($courses) > 0 ) : ?>
@@ -53,10 +46,8 @@ require_once('model/course_db.php');
             <th>Holes</th>
           </tr>
         </tfoot>
-
         <tbody>
         <?php foreach($courses as $course) : ?>
-
             <tr>
               <td><?php echo $course['courseName'];?></td>
               <td><?php echo $course['city'];?></td>
@@ -69,7 +60,6 @@ require_once('model/course_db.php');
                   <button type="submit" class="btn btn-warning btn-sm">Edit</button>
                 </form>
               </td>
-
               <td>
                 <form action="" method="post" >
                   <input type="hidden" name="action" value="course_view_delete_confirm">
@@ -77,7 +67,6 @@ require_once('model/course_db.php');
                   <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
               </td>
-
               <td>
                 <form action="" method="post">
                   <input type="hidden" name="action" value="holes_view_add">
@@ -85,7 +74,6 @@ require_once('model/course_db.php');
                   <button type="submit" class="btn btn-success btn-sm">Add</button>
                 </form>
               </td>
-
               <td>
                 <form action="" method="post">
                   <input type="hidden" name="action" value="holes_view_edit">
@@ -93,7 +81,6 @@ require_once('model/course_db.php');
                   <button type="submit" class="btn btn-warning btn-sm">Edit</button>
                 </form>
               </td>
-
               <td>
                 <form action="" method="post">
                   <input type="hidden" name="action" value="holes_view_delete_confirm">
@@ -114,7 +101,6 @@ if (isset($_SESSION['form_data'])) {
   unset($_SESSION['form_data']);
 }
 ?>
-
 <script language='javascript'>
 $(document).ready(function() {
   $('#course_list').DataTable();

@@ -1,53 +1,52 @@
 <?php
-	if (isset($_POST["submit"])) {
-		$name = $_POST['name'];
-		$email = $_POST['email'];
-		$message = $_POST['message'];
-		$human = intval($_POST['human']);
-		$from = 'Demo Contact Form';
-		$to = 'example@domain.com';
-		$subject = 'Message from Contact Demo ';
+if (isset($_POST["submit"])) {
+	$name = $_POST['name'];
+	$email = $_POST['email'];
+	$message = $_POST['message'];
+	$human = intval($_POST['human']);
+	$from = 'Demo Contact Form';
+	$to = 'example@domain.com';
+	$subject = 'Message from Contact Demo ';
 
-		$body ="From: $name\n E-Mail: $email\n Message:\n $message";
-		// Check if name has been entered
-		if (!$_POST['name']) {
-			$errName = 'Please enter your name';
-		}
+	$body ="From: $name\n E-Mail: $email\n Message:\n $message";
+	// Check if name has been entered
+	if (!$_POST['name']) {
+		$errName = 'Please enter your name';
+	}
 
-		// Check if email has been entered and is valid
-		if (!$_POST['email'] || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-			$errEmail = 'Please enter a valid email address';
-		}
+	// Check if email has been entered and is valid
+	if (!$_POST['email'] || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+		$errEmail = 'Please enter a valid email address';
+	}
 
-		//Check if message has been entered
-		if (!$_POST['message']) {
-			$errMessage = 'Please enter your message';
+	//Check if message has been entered
+	if (!$_POST['message']) {
+		$errMessage = 'Please enter your message';
+	}
+	//Check if simple anti-bot test is correct
+	if ($human !== 5) {
+		$errHuman = 'Your anti-spam is incorrect';
+	}
+	// If there are no errors, send the email
+	if (!$errName && !$errEmail && !$errMessage && !$errHuman) {
+		if (mail ($to, $subject, $body, $from)) {
+			$result='<div class="alert alert-success">Thank You! I will be in touch</div>';
+		} else {
+			$result='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later.</div>';
 		}
-		//Check if simple anti-bot test is correct
-		if ($human !== 5) {
-			$errHuman = 'Your anti-spam is incorrect';
-		}
-// If there are no errors, send the email
-if (!$errName && !$errEmail && !$errMessage && !$errHuman) {
-	if (mail ($to, $subject, $body, $from)) {
-		$result='<div class="alert alert-success">Thank You! I will be in touch</div>';
-	} else {
-		$result='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later.</div>';
 	}
 }
-	}
 ?>
 
 <?php $pageTitle = "Contact";?>
 <?php include '../view/header.php';?>
 
-
-  <body>
-<?php include '../view/navbar.php';?>
-  	<div class="container">
-  		<div class="row">
-  			<div class="col-md-5 col-md-offset-3">
-  				<h1 class="page-header text-center">Contact Us</h1>
+<body>
+	<?php include '../view/navbar.php';?>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-md-offset-3">
+				<h1 class="page-header text-center">Contact Us</h1>
 				<form class="form-horizontal" role="form" method="post" action="index.php">
 					<div class="form-group">
 						<label for="name" class="col-sm-2 control-label">Name</label>
@@ -90,6 +89,6 @@ if (!$errName && !$errEmail && !$errMessage && !$errHuman) {
 				</form>
 			</div>
 		</div>
-</div> <!-- /container -->
+	</div>
 
-<?php include '../view/footer.php';?>
+	<?php include '../view/footer.php';?>

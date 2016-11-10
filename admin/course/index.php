@@ -1,6 +1,5 @@
 <?php
 require_once('../../util/main.php');
-//require_once('util/secure_conn.php');
 require_once('util/valid_admin.php');
 require_once('model/admin_db.php');
 require_once('model/hole_db.php');
@@ -122,7 +121,7 @@ switch ($action) {
             display_error('You must include a numeric number for the course data.
                            Please try again.');
                        }
-        // Create course
+        // Update course
         else {
                 update_course(
                 $course_id, $_POST['name'], $_POST['city'], $_POST['province'],
@@ -131,7 +130,7 @@ switch ($action) {
                 $_POST['mOut'], $_POST['mIn'], $_POST['mTotal']
                 );
             }
-        redirect($app_path . 'admin/course');
+            header("Location: .");
         break;
 
     case 'course_view_delete_confirm':
@@ -157,7 +156,7 @@ switch ($action) {
     case 'course_delete':
         $course_id = intval($_POST['course_id']);
         delete_course($course_id);
-        redirect($app_path . 'admin/course');
+        header("Location: .");
         break;
 
     case 'holes_view_add':
@@ -169,7 +168,7 @@ switch ($action) {
 
     case 'holes_add':
             add_holes();
-            redirect($app_path . 'admin/course');
+            header("Location: .");
         break;
 
     case 'holes_view_edit':
@@ -204,7 +203,7 @@ switch ($action) {
         $par = intval($_POST['par']);
         $stroke = intval($_POST['stroke']);
         update_hole($hole_id, $meters, $par, $stroke);
-        redirect($app_path . 'admin/course');
+        header("Location: .");
         break;
 
     case 'holes_view_delete_confirm':
@@ -217,7 +216,7 @@ switch ($action) {
     case 'holes_delete':
         $course_id = intval($_POST['course_id']);
         delete_holes($course_id);
-        redirect($app_path . 'admin/course');
+        header("Location: .");
         break;
 
     default:

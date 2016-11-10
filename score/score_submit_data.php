@@ -103,4 +103,4 @@ include ('view/navbar.php');
                     </form>
                   </div>
                 </div>
-<?php include "view/footer.php";?>
+                <?php include "view/footer.php";?>

@@ -1,3 +1,4 @@
+<?php $pageTitle = "Admin-Account";?>
 <?php include '../../view/header.php'; ?>
 <div class="container">
     <div class="row">

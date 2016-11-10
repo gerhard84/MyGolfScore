@@ -9,7 +9,6 @@ function get_all_players() {
     return $result;
 }
 
-
 // Validate email
 function is_valid_player_email($email) {
     global $db;
@@ -191,7 +190,6 @@ $statement->execute();
 // get the number of records returned
 $num = $statement->rowCount();
 if($num>0){
-    // this array will become JSON later
     $data = array();
     // loop through the returned data
     while ($row = $statement->fetch(PDO::FETCH_ASSOC)){

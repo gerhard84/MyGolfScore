@@ -1,8 +1,6 @@
 <?php
 require_once('../../util/main.php');
-//require_once('util/secure_conn.php');
 require_once('model/admin_db.php');
-//include ('view/navbar_admin.php');
 if (isset($_SESSION['user'])) {
     display_error('You cannot login to the admin section while ' .
                   'logged in as a customer.');
@@ -62,7 +60,6 @@ switch ($action) {
         $_SESSION['form_data']['last_name'] = $last_name;
 
         // Validate admin user data
-        // TO DO: Improve this validation
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             display_error('The e-mail address ' . $email . ' is not valid.');
         } elseif (is_valid_admin_email($email)) {
@@ -92,8 +89,8 @@ switch ($action) {
             $_SESSION['admin'] = get_admin($admin_id);
         }
         redirect($app_path . 'admin');
-        //redirect('.');
         break;
+
     case 'view_account':
         // Get admin user data from session
         $name = $_SESSION['admin']['firstName'] . ' ' .
@@ -147,13 +144,11 @@ switch ($action) {
     case 'delete':
         $admin_id = intval($_POST['admin_id']);
         delete_admin($admin_id);
-        //redirect($app_path . 'admin');
         redirect($app_path . 'admin/account');
         break;
     case 'logout':
         unset($_SESSION['admin']);
-        redirect($app_path);
-        //redirect($app_path . 'index.php');
+        redirect($app_path);        
         break;
     default:
         display_error('Unknown account action: ' . $action);

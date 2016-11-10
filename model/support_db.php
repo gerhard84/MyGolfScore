@@ -106,7 +106,7 @@ function add_note1($ticket_id, $note_1) {
       }
 
       function add_final($ticket_id, $note_final) {
-        $status = 'Closed';        
+        $status = 'Closed';
         global $db;
         $query = 'UPDATE support
                   SET note_final = :note_final,
@@ -124,13 +124,4 @@ function add_note1($ticket_id, $note_1) {
               display_db_error($error_message);
           }
         }
-
-
-
-
-
-
-
-
-
  ?>

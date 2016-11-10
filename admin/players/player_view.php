@@ -40,8 +40,6 @@
             $lastName = $player['lastName'];
             $email = $player['email'];
             $town = $player['town'];
-            //date_format($date, 'd/m/y');
-            //date_create($row[0]);
             $regDate = date_create($player['regDate']);
             $logins = $player['logins'];
             ?>

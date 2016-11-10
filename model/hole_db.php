@@ -148,7 +148,6 @@ function edit_holes() {
      }
  }
 
-
 function update_hole($hole_id, $meters, $par, $stroke) {
     global $db;
     $query = "UPDATE holes
@@ -184,7 +183,6 @@ function delete_holes($course_id) {
     }
 }
 
-
 function get_si_F9($course_id) {
     global $db;
     $query = "SELECT `stroke`
@@ -206,9 +204,6 @@ function get_si_F9($course_id) {
     }
 }
 
-
-
-
 function get_si_B9($course_id){
     global $db;
     $query = "SELECT `stroke`
@@ -228,8 +223,6 @@ function get_si_B9($course_id){
         $error_message = $e->getMessage();
         display_db_error($error_message);
     }
-    }
-
-
+  }
 
 ?>

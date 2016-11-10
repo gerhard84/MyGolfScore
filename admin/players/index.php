@@ -1,6 +1,5 @@
 <?php
 require_once('../../util/main.php');
-//require_once('util/secure_conn.php');
 require_once('model/admin_db.php');
 require_once('model/player_db.php');
 include ('view/navbar_admin.php');
@@ -26,7 +25,7 @@ switch ($action) {
         // View Players
         include 'player_view.php';
         break;
-        
+
     case 'view_edit':
         // Get admin user data
         $player_id = intval($_POST['player_id']);

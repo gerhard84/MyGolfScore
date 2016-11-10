@@ -42,8 +42,7 @@ switch ($action) {
         display_error("Please enter a message");
     }
 
-    //email_contact($email, $name, $subject, $msg);
-
+    email_contact($email, $name, $subject, $msg);
     add_support($email, $name, $subject, $msg);
 
     redirect('..');

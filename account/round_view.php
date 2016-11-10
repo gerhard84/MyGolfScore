@@ -99,9 +99,10 @@ include 'view/navbar.php';
                             </div>
                           </div>
                           <div class="row col-md-10 col-md-offset-5" >
-<input type="button" name="cancel" value="Cancel" class="btn btn-danger col-md-2" onClick="window.location='index.php'"/>                          </div>
-                        </br>
-                      </div>
-                    </form>
+                            <input type="button" name="cancel" value="Cancel" class="btn btn-danger col-md-2" onClick="window.location='index.php'"/>                          </div>
+                          </br>
+                        </div>
+                      </form>
+                    </div>
                   </div>
-                </div>
+    <?php include '../view/footer.php'; ?>

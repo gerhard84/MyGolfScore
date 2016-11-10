@@ -1,6 +1,5 @@
 <?php
 require_once('../util/main.php');
-//require_once('util/secure_conn.php');
 require_once('model/player_db.php');
 require_once('model/handicap_db.php');
 require_once('model/round_db.php');
@@ -40,7 +39,6 @@ switch ($action) {
             $_SESSION['form_data']['last_name'] = $last_name;
             $_SESSION['form_data']['town'] = $town;
             // Validate user data
-            // TO DO Improve this validation
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 display_error('The e-mail address ' . $email . ' is not valid.');
             } elseif (is_valid_player_email($email)) {
@@ -65,7 +63,7 @@ switch ($action) {
             // Add the player data to the database
             $player_id = add_player($email, $first_name,
                                         $last_name, $password_1, $password_2, $town);
-            //Create default handicap            
+            //Create default handicap
             add_handicap($player_id);
             //Send registration  email
             email_register($email, $first_name, $last_name);
@@ -96,7 +94,6 @@ switch ($action) {
         $player_id = ($_SESSION['user']['playerID']);
         $logins = login_count($player_id);
         $rounds = get_rounds_by_player($player_id);
-        //$roundCount = round_count_player($player_id);
         $lHandicap = get_handicap($player_id);
         $gRounds = graph_rounds_by_player($player_id);
         include 'profile_view.php';
@@ -167,7 +164,6 @@ switch ($action) {
         $gross = $roundInfo[0]['gross'];
         $f9Scores = array_slice($roundInfo, 0, 9);
         $b9Scores = array_slice($roundInfo, 9, 18);
-
 
         include 'round_view.php';
         break;

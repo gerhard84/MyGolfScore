@@ -1,5 +1,4 @@
 <?php
-//require_once('../util/main.php');
 require("util/PHPMailer/PHPMailerAutoload.php");
 
 // Registration mail
@@ -22,7 +21,6 @@ function email_register($email, $first_name, $last_name) {
   $mail->MsgHTML($message);
   $mail->IsHTML(true);
   $mail->CharSet="utf-8";
-  //$mail->AltBody(strip_tags($message));
   if(!$mail->Send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;
   }
@@ -53,7 +51,6 @@ function email_scorecard($gross, $net, $handicap, $email, $name, $cname, $play_d
   $mail->MsgHTML($message);
   $mail->IsHTML(true);
   $mail->CharSet="utf-8";
-  //$mail->AltBody(strip_tags($message));
   if(!$mail->Send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;
   }
@@ -82,12 +79,9 @@ function email_contact($email, $name, $subject, $msg) {
   $mail->MsgHTML($message);
   $mail->IsHTML(true);
   $mail->CharSet="utf-8";
-  //$mail->AltBody(strip_tags($message));
   if(!$mail->Send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;
   }
 }
-
-
 
 ?>

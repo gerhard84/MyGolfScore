@@ -63,6 +63,7 @@
                     WHERE holesPlayed = 18
                     AND r.playerID = :player_id
                     GROUP BY r.scorecardID
+                    ORDER BY playDate
                     LIMIT 20";
         try {
             $statement = $db->prepare($query);
@@ -76,13 +77,12 @@
             display_db_error($error_message);
         }
     }
+
     // Calculate handicap differential for 18 hole rounds
     function calc_hand_diff($gross, $slope, $rating, $holes) {
 
             $diff = ($gross - $rating) * (113 / $slope);
-
         return $diff;
-
     }
 
     function getNumDifs($dif){
@@ -132,7 +132,6 @@ function calc_handicap($rounds) {
     $difCount = count($dif);
     // Get amount of differentials to use
     $numDifs = getNumDifs($difCount);
-
     // Sum all differentials
     $sum = 0;
     for( $i = 0; $i < $numDifs; $i++){
@@ -140,16 +139,10 @@ function calc_handicap($rounds) {
     }
     //Calculate average of differentials
     $avg = ($sum/$numDifs) * 0.96;
-
     //truncate the result to the first decimal place
     if($avg >= 0) $avg = floor($avg * 10) / 10;
     else $avg = ceil($avg * 10)/10;
-
     return $avg;
-
 }
-
-
-
 
  ?>
