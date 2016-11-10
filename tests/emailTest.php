@@ -8,9 +8,6 @@ require_once('model/course_db.php');
 require_once('model/hole_db.php');
 require_once('model/email.php');
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 $email = 'gerhard.g84@gmail.com';
 $name = 'Gerhard';
 $subject = 'Test';

@@ -4,10 +4,6 @@ require_once('util/main.php');
 require_once('model/player_db.php');
 require_once('model/handicap_db.php');
 
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 $player_id = 10;
 
 $rounds = get_last_20_rounds_by_player($player_id);
